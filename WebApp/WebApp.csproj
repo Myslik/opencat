@@ -237,7 +237,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Data\Data.csproj">
+    <ProjectReference Include="..\Data\Data.csproj">
       <Project>{5f84fa73-094e-409d-bd23-747ee610367b}</Project>
       <Name>Data</Name>
     </ProjectReference>
