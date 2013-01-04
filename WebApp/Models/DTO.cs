@@ -5,9 +5,9 @@ using System.Web;
 
 namespace OpenCat.Models
 {
-    public class Segment
+    public class DTO
     {
-        public string source { get; set; }
-        public string target { get; set; }
+        public Document document { get; set; }
+        public IEnumerable<Document> documents { get; set; }
     }
 }

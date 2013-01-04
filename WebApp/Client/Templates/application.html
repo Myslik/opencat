@@ -8,8 +8,14 @@
             </button>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li class="active">
-                        <a href="#">Index</a>
+                    <li>
+                        {{#linkTo index}}Index{{/linkTo}}
+                    </li>
+                    <li>
+                        {{#linkTo documents}}Documents{{/linkTo}}
+                    </li>
+                    <li>
+                        {{#linkTo guest}}Guest{{/linkTo}}
                     </li>
                 </ul>
             </div>
@@ -18,8 +24,5 @@
 </div>
 
 <div class="container">
-    <div class="row">
-        <h1>{{App.name}}</h1>
-    </div>
     {{outlet}}
 </div>

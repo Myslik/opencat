@@ -135,19 +135,35 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DocumentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\SegmentsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DataContext.cs" />
-    <Compile Include="Models\Segment.cs" />
+    <Compile Include="Models\Document.cs" />
+    <Compile Include="Models\DTO.cs" />
+    <Compile Include="Models\Entity.cs" />
+    <Compile Include="Models\Generator.cs" />
+    <Compile Include="Models\Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Client\App.js" />
+    <Content Include="Client\Controllers\DocumentsController.js" />
+    <Content Include="Client\Models\Document.js" />
+    <Content Include="Client\Router.js" />
+    <Content Include="Client\Store.js" />
     <Content Include="Client\Templates\application.html" />
+    <Content Include="Client\Templates\Document\edit.html" />
+    <Content Include="Client\Templates\Document\list.html" />
+    <Content Include="Client\Templates\Document\new.html" />
+    <Content Include="Client\Templates\guest.html" />
+    <Content Include="Client\Templates\index.html" />
     <Content Include="Client\Utils.js" />
+    <Content Include="Client\Views\Document\Edit.js" />
+    <Content Include="Client\Views\Document\List.js" />
+    <Content Include="Client\Views\Document\New.js" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -160,6 +176,8 @@
     <Content Include="Images\upload.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\ember-data.js" />
+    <Content Include="Scripts\ember-data.min.js" />
     <Content Include="Scripts\ember.js" />
     <Content Include="Scripts\ember.min.js" />
     <Content Include="Scripts\jquery-1.8.3.js" />
@@ -186,8 +204,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Client\Models\" />
-    <Folder Include="Client\Views\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

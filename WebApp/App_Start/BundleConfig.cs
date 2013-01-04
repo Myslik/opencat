@@ -12,14 +12,21 @@ namespace OpenCat
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new Bundle("~/bundles/templates", new EmberTemplateTransform("~/Client/Templates/"))
+            bundles.Add(new Bundle("~/bundles/templates", new TemplateTransform("~/Client/Templates/"))
                 .IncludeDirectory("~/Client/Templates/", "*.html", true));
 
-            bundles.Add(new ScriptBundle("~/bundles/ember").Include("~/Scripts/ember.js"));
+            bundles.Add(new ScriptBundle("~/bundles/ember").Include("~/Scripts/ember.js", "~/Scripts/ember-data.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/application").Include(
                         "~/Client/Utils.js",
-                        "~/Client/App.js"));
+                        "~/Client/App.js",
+                        "~/Client/Router.js",
+                        "~/Client/Store.js",
+                        "~/Client/Models/Document.js",
+                        "~/Client/Controllers/DocumentsController.js",
+                        "~/Client/Views/Document/List.js",
+                        "~/Client/Views/Document/Edit.js",
+                        "~/Client/Views/Document/New.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
@@ -29,11 +36,11 @@ namespace OpenCat
         }
     }
 
-    public class EmberTemplateTransform : IBundleTransform
+    public class TemplateTransform : IBundleTransform
     {
         private string virtualRootPath;
 
-        public EmberTemplateTransform(string virtualRootPath)
+        public TemplateTransform(string virtualRootPath)
         {
             this.virtualRootPath = virtualRootPath;
         }
