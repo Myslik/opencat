@@ -4,30 +4,31 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using OpenCat.Models;
 
 namespace OpenCat.Controllers
 {
-    public class ValuesController : ApiController
+    public class SegmentsController : ApiController
     {
         // GET api/values
-        public IEnumerable<string> Get()
+        public IEnumerable<Segment> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new Segment[] { new Segment { source = "source", target = "target" } };
         }
 
         // GET api/values/5
-        public string Get(int id)
+        public Segment Get(int id)
         {
-            return "value";
+            return new Segment { source = "source", target = "target" };
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Segment value)
         {
         }
 
         // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]Segment value)
         {
         }
 

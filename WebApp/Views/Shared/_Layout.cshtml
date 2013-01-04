@@ -4,45 +4,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>OpenCAT</title>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap-responsive.min.css" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-
-    <div class="container navbar-wrapper">
-        <div class="navbar navbar-inverse">
-            <div class="navbar-inner">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <a class="brand" href="/">OpenCAT</a>
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li class="active"><a href="/"><i class="icon-upload"></i> Upload</a></li>
-                        <li><a href="/editor"><i class="icon-edit"></i> Editor</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        @RenderBody()
-        <hr />
-        <div class="footer" style="text-align: center; color: #ccc;">
-            Written by Premysl Krajcovic
-        </div>
-    </div>
-
-    <!-- jQuery -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript">
-        window.jQuery || document.write('<script src="@Url.Content("~/Scripts/jquery-1.8.3.min.js")"><\/script>')
-    </script>
-
-    @Scripts.Render("~/bundles/libraries")
+    @RenderBody()
+    <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.3/underscore-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.rc.1/handlebars.min.js"></script>
+    @Scripts.Render("~/bundles/ember")
+    <script type="text/javascript" src="@Url.Content("~/bundles/templates")"></script>
+    @Scripts.Render("~/bundles/application")
     @RenderSection("scripts", required: false)
 </body>
 </html>
