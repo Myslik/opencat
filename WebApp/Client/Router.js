@@ -8,30 +8,45 @@
 
 App.Router.map(function (match) {
     match('/').to('index');
-    match('/documents').to('documentsSection', function (match) {
-        match('/').to('documents');
-        match('/new').to('newDocument');
-        match('/:document_id').to('document');
-    });
+    match('/documents').to('documents');
+    match('/documents/:document_id').to('document');
     match('/guest').to('guest');
 });
 
 App.IndexRoute = App.AuthRoute.extend();
 App.DocumentsRoute = App.AuthRoute.extend({
+    events: {
+        select: function (route, document) {
+            route.transitionTo('document', document);
+        },
+        reload: function (route) {
+            App.Document.find();
+        },
+        remove: function (route, document) {
+            var store = document.store;
+            document.deleteRecord();
+            store.commit();
+        }
+    },
     model: function () {
-        return App.Document.find();
+        if (App.Document.all().get('length') == 0) {
+            return App.Document.find();
+        }
+        return App.Document.all();
     }
 });
-App.NewDocumentRoute = App.AuthRoute.extend({
-    model: function () {
-        return App.Document.createRecord();
-    },
-    setupControllers: function (controller, model) {
-        this.controllerFor('document').set('content', model);
-    },
-    renderTemplates: function () {
-        var controller = this.controllerFor('document');
-        this.render({ controller: controller });
+App.DocumentRoute = App.AuthRoute.extend({
+    events: {
+        save: function (route) {
+            var controller = route.controllerFor('document');
+            controller.get('content').transaction.commit();
+            route.transitionTo('documents');
+        },
+        cancel: function (route) {
+            var controller = route.controllerFor('document');
+            controller.get('content').transaction.rollback();
+            route.transitionTo('documents');
+        }
     }
-})
+});
 App.GuestRoute = Ember.Route.extend();

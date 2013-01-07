@@ -25,6 +25,7 @@ namespace OpenCat.Controllers
 
         public DTO Post(DTO dto)
         {
+
             Repository.Create(dto.document);
             return dto;
         }
