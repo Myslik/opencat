@@ -1,9 +1,9 @@
 ﻿namespace OpenCat.Models
 {
-    using System;
+    using MongoDB.Bson;
 
     public class Entity
     {
-        public int id { get; set; }
+        public ObjectId id { get; set; }
     }
 }

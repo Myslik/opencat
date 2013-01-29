@@ -1,5 +1,6 @@
 ﻿namespace OpenCat.Models
 {
+    using MongoDB.Bson;
     using MongoDB.Driver;
     using MongoDB.Driver.Builders;
     using System.Collections.Generic;
@@ -35,33 +36,50 @@
             Context = context;
         }
 
-        public T Get(int id)
+        public T Get(ObjectId id)
         {
             return Collection.FindOneById(id);
         }
 
+        public T Get(string id)
+        {
+            return Get(ObjectId.Parse(id));
+        }
+
         public IEnumerable<T> Get()
         {
-            return Collection.FindAll().AsQueryable();
+            var result = Collection.FindAll().AsQueryable();
+
+            return result;
         }
 
         public void Create(T entity)
         {
-            entity.id = Context.Generator.Get<T>();
             Collection.Insert(entity);
         }
 
-        public void Edit(T entity)
+        public void Edit(ObjectId id, T entity)
         {
-            var query = Query.EQ("_id", entity.id);
+            entity.id = id;
+            var query = Query.EQ("_id", id);
             var update = Update.Replace<T>(entity);
-            Collection.Update(query, update, UpdateFlags.None);
+            Collection.Update(query, update);
         }
 
-        public void Delete(int id)
+        public void Edit(string id, T entity)
+        {
+            Edit(ObjectId.Parse(id), entity);
+        }
+
+        public void Delete(ObjectId id)
         {
             var query = Query.EQ("_id", id);
             Collection.Remove(query);
+        }
+
+        public void Delete(string id)
+        {
+            Delete(ObjectId.Parse(id));
         }
     }
 }
