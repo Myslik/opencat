@@ -152,6 +152,7 @@
     <Compile Include="Transforms\TemplateTransform.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Client\Api\controller.js" />
     <Content Include="Client\App.js" />
     <Content Include="Client\Documents\controller.js" />
     <Content Include="Client\Documents\model.js" />
@@ -163,7 +164,7 @@
     <Content Include="Client\Templates\Document\edit.html" />
     <Content Include="Client\Templates\Document\list.html" />
     <Content Include="Client\Templates\Document\new.html" />
-    <Content Include="Client\Templates\guest.html" />
+    <Content Include="Client\Templates\api.html" />
     <Content Include="Client\Templates\index.html" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />

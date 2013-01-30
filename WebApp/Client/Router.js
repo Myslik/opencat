@@ -1,7 +1,6 @@
 ﻿App.AuthRoute = Ember.Route.extend({
     authenticatedBinding: Ember.Binding.oneWay('App.user.authenticated'),
     redirect: function () {
-        if (!this.get('authenticated')) this.transitionTo('guest');
         return this;
     }
 });
@@ -12,8 +11,5 @@ App.Router.map(function () {
         this.route('new');
         this.route('edit', { path: '/:document_id' });
     });
-    this.route('guest');
+    this.route('api');
 });
-
-App.IndexRoute = App.AuthRoute.extend();
-App.GuestRoute = Ember.Route.extend();

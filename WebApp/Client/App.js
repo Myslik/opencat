@@ -1,5 +1,6 @@
 ﻿window.App = Ember.Application.create({
     user: Ember.Object.create({
+        name: 'Premysl Krajcovic',
         authenticated: true
     })
 });
