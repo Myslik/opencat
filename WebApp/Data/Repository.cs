@@ -1,8 +1,9 @@
-﻿namespace OpenCat.Models
+﻿namespace OpenCat.Data
 {
     using MongoDB.Bson;
     using MongoDB.Driver;
     using MongoDB.Driver.Builders;
+    using OpenCat.Models;
     using System.Collections.Generic;
     using System.Linq;
 

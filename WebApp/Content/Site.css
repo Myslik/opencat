@@ -1,12 +1,61 @@
-﻿/* Body and structure
-------------------------- */
-body {
-  position: relative;
-  padding-top: 60px;
-}
-
-/* CUSTOMIZE THE NAVBAR
---------------------------*/
+﻿/* CUSTOMIZE THE NAVBAR
+    --------------------------*/
 body > .navbar {
     font-size: 13px;
+}
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html,
+body,
+#application-container {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -60px;
+}
+
+/* Set the fixed height of the footer here */
+#push-top,
+#push-bottom,
+#footer {
+    height: 60px;
+}
+
+#footer {
+    background-color: #f5f5f5;
+}
+
+#footer .credit {
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 979px) {
+    #push-top {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    #push-top {
+        display: none;
+    }
+
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 }

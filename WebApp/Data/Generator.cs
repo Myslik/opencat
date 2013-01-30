@@ -1,4 +1,4 @@
-﻿namespace OpenCat.Models
+﻿namespace OpenCat.Data
 {
     using MongoDB.Driver;
     using MongoDB.Driver.Builders;

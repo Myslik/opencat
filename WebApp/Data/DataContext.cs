@@ -1,6 +1,7 @@
 ﻿namespace OpenCat
 {
     using MongoDB.Driver;
+    using OpenCat.Data;
     using OpenCat.Models;
 
     public class DataContext

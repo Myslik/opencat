@@ -10,4 +10,4 @@ App.ready = function () {
 };
 
 App.ApplicationController = Ember.Controller.extend();
-App.ApplicationView = Ember.View.extend({ templateName: 'application' });
+App.ApplicationView = Ember.View.extend({ templateName: 'application', elementId: 'application-container' });

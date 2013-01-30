@@ -1,5 +1,6 @@
 ﻿namespace OpenCat.Controllers
 {
+    using OpenCat.Data;
     using OpenCat.Models;
     using System.Net;
     using System.Net.Http;
