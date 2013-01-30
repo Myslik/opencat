@@ -4,5 +4,9 @@
     })
 });
 
+App.ready = function () {
+    App.Document.find();
+};
+
 App.ApplicationController = Ember.Controller.extend();
 App.ApplicationView = Ember.View.extend({ templateName: 'application' });

@@ -58,17 +58,18 @@
             Collection.Insert(entity);
         }
 
-        public void Edit(ObjectId id, T entity)
+        public bool Edit(ObjectId id, T entity)
         {
             entity.id = id;
             var query = Query.EQ("_id", id);
             var update = Update.Replace<T>(entity);
-            Collection.Update(query, update);
+            var concern = Collection.Update(query, update);
+            return concern.DocumentsAffected > 0;
         }
 
-        public void Edit(string id, T entity)
+        public bool Edit(string id, T entity)
         {
-            Edit(ObjectId.Parse(id), entity);
+            return Edit(ObjectId.Parse(id), entity);
         }
 
         public void Delete(ObjectId id)

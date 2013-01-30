@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
-using OpenCat.Models;
-using System.Net.Http;
-using System.Web.Http.Filters;
-using MongoDB.Bson;
-using System.Linq;
-
-namespace OpenCat.Controllers
+﻿namespace OpenCat.Controllers
 {
+    using OpenCat.Models;
+    using System.Net;
+    using System.Net.Http;
+    using System.Web.Http;
+
     public class DocumentsController : ApiController
     {
         public Repository<Document> Repository { get; set; }
@@ -24,7 +21,9 @@ namespace OpenCat.Controllers
 
         public DTO Get(string id)
         {
-            return new DTO { document = Repository.Get(id) };
+            var document = Repository.Get(id);
+            if (document == null) throw new HttpResponseException(HttpStatusCode.NotFound);
+            return new DTO { document = document };
         }
 
         public DTO Post(DTO dto)
@@ -33,9 +32,10 @@ namespace OpenCat.Controllers
             return dto;
         }
 
-        public DTO Put(HttpRequestMessage request, string id, DTO dto)
+        public DTO Put(string id, DTO dto)
         {
-            Repository.Edit(id, dto.document);
+            var ok = Repository.Edit(id, dto.document);
+            if (!ok) throw new HttpResponseException(HttpStatusCode.BadRequest);
             return dto;
         }
 

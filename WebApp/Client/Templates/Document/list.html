@@ -1,5 +1,5 @@
 ﻿<div class="btn-toolbar">
-    <button type="button" class="btn btn-primary">New</button>
+    <button type="button" class="btn btn-primary" {{action "create"}}>New</button>
     <button type="button" class="btn" {{action "reload"}}>Reload</button>
 </div>
 <table class="table table-condensed table-hover">
@@ -15,7 +15,7 @@
         {{#each document in controller}}
             <tr style="cursor: pointer;">
                 <td>{{document.id}}</td>
-                <td><a href="#" {{action "select" document}}>{{document.name}}</a></td>
+                <td><a href="#" {{action "show" document}}>{{document.name}}</a></td>
                 <td>{{document.words}}</td>
                 <td><a href="#" {{action "remove" document}}>Remove</a></td>
             </tr>
