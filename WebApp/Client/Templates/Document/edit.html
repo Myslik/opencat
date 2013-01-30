@@ -11,6 +11,11 @@
             {{view Ember.TextField valueBinding="content.words"}}
         </div>
     </div>
+    <ul class="unstyled" style="margin-left: 180px;">
+        {{#each content.attachments}}
+        <li><i class="icon-file"></i> <a href="/attachment/download/{{unbound this}}">{{this}}</a></li>
+        {{/each}}
+    </ul>
     <div class="form-actions">
         <button class="btn btn-primary" {{action "update" content}}>Save changes</button>
         <button class="btn" {{action "cancel" content}}>Cancel</button>
