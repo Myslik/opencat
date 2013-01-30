@@ -136,10 +136,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AttachmentController.cs" />
-    <Compile Include="Controllers\DocumentsController.cs" />
+    <Compile Include="Controllers\API\AttachmentsController.cs" />
+    <Compile Include="Controllers\AttachmentsController.cs" />
+    <Compile Include="Controllers\API\DocumentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LanguagesController.cs" />
+    <Compile Include="Controllers\API\LanguagesController.cs" />
     <Compile Include="Converters\MongoConverter.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\UploadedFile.cs" />
@@ -147,6 +148,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Data\DataContext.cs" />
+    <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\DTO.cs" />
     <Compile Include="Models\Entity.cs" />
@@ -159,6 +161,7 @@
   <ItemGroup>
     <Content Include="Client\Api\controller.js" />
     <Content Include="Client\App.js" />
+    <Content Include="Client\Attachments\model.js" />
     <Content Include="Client\Components\languages.js" />
     <Content Include="Client\Components\uploader.js" />
     <Content Include="Client\Documents\controller.js" />

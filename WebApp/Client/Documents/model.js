@@ -1,7 +1,11 @@
 ﻿var attr = DS.attr;
 
 App.Document = DS.Model.extend({
-    name: attr('string', { required: true }),
+    // Attributes
+    name: attr('string'),
     words: attr('number'),
-    attachments: attr('array')
+    attachments: attr('array'),
+
+    // Relationships
+    attachments: DS.hasMany('App.Attachment')
 });

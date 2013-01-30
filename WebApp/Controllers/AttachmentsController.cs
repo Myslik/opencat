@@ -9,12 +9,12 @@
     using System.Net;
     using System.Web.Mvc;
 
-    public class AttachmentController : Controller
+    public class AttachmentsController : Controller
     {
         private DataContext Context { get; set; }
         private Repository<Document> Documents { get; set; }
 
-        public AttachmentController()
+        public AttachmentsController()
         {
             Context = new DataContext();
             Documents = new Repository<Document>(Context);

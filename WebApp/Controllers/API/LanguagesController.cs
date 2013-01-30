@@ -1,4 +1,4 @@
-﻿namespace OpenCat.Controllers
+﻿namespace OpenCat.ApiControllers
 {
     using OpenCat.Models;
     using System.Collections.Generic;
