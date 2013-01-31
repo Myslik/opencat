@@ -161,7 +161,9 @@
   <ItemGroup>
     <Content Include="Client\Api\controller.js" />
     <Content Include="Client\App.js" />
+    <Content Include="Client\Attachments\controller.js" />
     <Content Include="Client\Attachments\model.js" />
+    <Content Include="Client\Attachments\view.js" />
     <Content Include="Client\Components\languages.js" />
     <Content Include="Client\Components\uploader.js" />
     <Content Include="Client\Documents\controller.js" />
@@ -171,6 +173,7 @@
     <Content Include="Client\Router.js" />
     <Content Include="Client\Store.js" />
     <Content Include="Client\Templates\application.html" />
+    <Content Include="Client\Templates\Attachment\list.html" />
     <Content Include="Client\Templates\Document\edit.html" />
     <Content Include="Client\Templates\Document\list.html" />
     <Content Include="Client\Templates\Document\new.html" />

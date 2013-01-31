@@ -1,11 +1,11 @@
-﻿App.DocumentIndexView = Ember.View.extend({
+﻿App.DocumentsIndexView = Ember.View.extend({
     templateName: 'Document/list'
 });
 
-App.DocumentNewView = Ember.View.extend({
+App.DocumentsNewView = Ember.View.extend({
     templateName: 'Document/new'
 });
 
-App.DocumentEditView = Ember.View.extend({
+App.DocumentView = Ember.View.extend({
     templateName: 'Document/edit'
 });

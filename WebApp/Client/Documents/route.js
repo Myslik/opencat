@@ -1,20 +1,20 @@
-﻿App.DocumentRoute = App.AuthRoute.extend({
+﻿App.DocumentsRoute = App.AuthRoute.extend({
     events: {
         create: function () {
-            this.transitionTo('document.new');
+            this.transitionTo('documents.new');
         },
         show: function (document) {
-            this.transitionTo('document.edit', document);
+            this.transitionTo('document', document);
         },
         remove: function (document) {
             document.deleteRecord();
             document.transaction.commit();
-            this.transitionTo('document');
+            this.transitionTo('documents');
         }
     },
 });
 
-App.DocumentIndexRoute = App.AuthRoute.extend({
+App.DocumentsIndexRoute = App.AuthRoute.extend({
     events: {
         reload: function () {
             App.Document.find();
@@ -25,15 +25,15 @@ App.DocumentIndexRoute = App.AuthRoute.extend({
     }
 });
 
-App.DocumentNewRoute = App.AuthRoute.extend({
+App.DocumentsNewRoute = App.AuthRoute.extend({
     events: {
         update: function (document) {
             document.transaction.commit();
-            this.transitionTo('document');
+            this.transitionTo('documents');
         },
         cancel: function (document) {
             document.deleteRecord();
-            this.transitionTo('document');
+            this.transitionTo('documents');
         }
     },
     model: function () {
@@ -41,15 +41,27 @@ App.DocumentNewRoute = App.AuthRoute.extend({
     }
 });
 
-App.DocumentEditRoute = App.AuthRoute.extend({
+App.DocumentRoute = App.AuthRoute.extend({
     events: {
         update: function (document) {
             document.transaction.commit();
-            this.transitionTo('document');
+            this.transitionTo('documents');
         },
         cancel: function (document) {
             document.transaction.rollback();
-            this.transitionTo('document');
+            this.transitionTo('documents');
         }
+    },
+    setupController: function(controller, model) {
+        controller.set('content', model);
+        this.controllerFor('attachments').set('content', model.get('attachments'));
+    },
+    renderTemplate: function () {
+        this.render();
+        this.render('attachments', {
+            into: 'document',
+            outlet: 'attachments',
+            controller: this.controllerFor('attachments')
+        });
     }
 });

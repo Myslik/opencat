@@ -38,5 +38,10 @@
             var file = Context.Database.GridFS.FindOne(Query.EQ("_id", parsedId));
             return new DTO { attachment = Attachment.FromFileInfo(file) };
         }
+
+        public void Delete(string id)
+        {
+            Context.Database.GridFS.DeleteById(ObjectId.Parse(id));
+        }
     }
 }
