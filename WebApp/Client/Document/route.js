@@ -41,6 +41,9 @@ App.DocumentsNewRoute = App.AuthRoute.extend({
     },
     model: function () {
         return App.Document.createRecord({ name: 'New Document', words: 0 });
+    },
+    renderTemplate: function () {
+        this.render({ into: 'application' });
     }
 });
 

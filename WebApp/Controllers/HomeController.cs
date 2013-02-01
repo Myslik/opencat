@@ -10,5 +10,12 @@
         {
             return View();
         }
+
+        public ActionResult Drop()
+        {
+            var context = new DataContext();
+            context.Database.Drop();
+            return RedirectToAction("Index");
+        }
     }
 }

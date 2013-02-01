@@ -5,6 +5,6 @@
     style: 'margin-left: 180px;',
     contentBinding: 'controller',
     itemViewClass: Ember.View.extend({
-        templateName: 'Attachment/item',
+        templateName: 'attachment/item',
     })
 });
