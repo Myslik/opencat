@@ -17,7 +17,7 @@
 
         public void Process(BundleContext context, BundleResponse response)
         {
-            var builder = new Ember.Handlebars.TemplateBuilder();
+            var builder = new OpenCat.TemplateBuilder();
             var rootPath = new Uri(context.HttpContext.Server.MapPath(virtualRootPath));
             foreach (var info in response.Files)
             {

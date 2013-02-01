@@ -6,9 +6,21 @@
         </div>
     </div>
     <div class="control-group">
+        <label class="control-label" for="description">Description</label>
+        <div class="controls">
+            {{view Ember.TextField valueBinding="content.description"}}
+        </div>
+    </div>
+    <div class="control-group">
         <label class="control-label" for="words">Words</label>
         <div class="controls">
             {{view Ember.TextField valueBinding="content.words"}}
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label"></label>
+        <div class="controls">
+            {{view App.Uploader urlBinding="uploadLink" classNames="btn btn-success"}}
         </div>
     </div>
     {{outlet attachments}}

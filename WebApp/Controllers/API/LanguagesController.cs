@@ -8,11 +8,20 @@
 
     public class LanguagesController : ApiController
     {
-        public IEnumerable<Language> Get()
+        public DTO Get()
         {
-            return CultureInfo.GetCultures(CultureTypes.AllCultures)
-                .OrderBy(culture => culture.DisplayName)
-                .Select(culture => new Language { ietf = culture.IetfLanguageTag, name = culture.DisplayName });
+            return new DTO
+            {
+                languages = CultureInfo.GetCultures(CultureTypes.AllCultures)
+                    .OrderBy(culture => culture.DisplayName)
+                    .Select(culture => new Language { id = culture.IetfLanguageTag, name = culture.DisplayName })
+            };
+        }
+
+        public DTO Get(string id)
+        {
+            var culture = CultureInfo.GetCultureInfo(id);
+            return new DTO { language = new Language { id = culture.IetfLanguageTag, name = culture.DisplayName } };
         }
     }
 }

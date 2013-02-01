@@ -22,7 +22,7 @@
 
         public DTO Get([FromUri] string[] ids)
         {
-            if (ids != null)
+            if (ids.Length > 0)
             {
                 var query = Query.In("_id", BsonArray.Create(ids.Select(id => ObjectId.Parse(id))));
                 return new DTO { attachments = Context.Database.GridFS.Find(query).Select(info => Attachment.FromFileInfo(info)) };

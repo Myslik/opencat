@@ -9,11 +9,12 @@
             <button type="button" class="btn btn-primary" {{action "create"}}>New</button>
             <button type="button" class="btn" {{action "reload"}}>Reload</button>
         </div>
-        <input type="text" placeholder="Search in documents..." />
+        {{view Ember.TextField placeholder="Filter by document name..." valueBinding="nameFilter"}}
         <ul class="unstyled" style="border-top: 1px solid #eee;">
-            {{#each document in controller}}
+            {{#each document in controller.filteredContent}}
             <li style="margin: 10px 0; border-bottom: 1px solid #eee;">
                 <ul class="inline pull-right">
+                    <li style="width: 70px;"><strong>W</strong> {{document.words}}</li>
                     <li><a href="#" {{action "remove" document}}><i class="icon-trash"></i></a></li>
                 </ul>
                 <h4 style="margin: 0;">
@@ -21,7 +22,10 @@
                     <a href="#" {{action "show" document}}>{{document.name}}</a>
                 </h4>
                 <div style="margin-left: 40px;">
-                    <p class="muted">{{ago document.createdAt}}</p>
+                    {{#if document.description}}
+                        <p>{{document.description}}</p>
+                    {{/if}}
+                    <p class="muted" style="font-size: 12px;">{{ago document.createdAt}}</p>
                 </div>
             </li>
             {{/each}}

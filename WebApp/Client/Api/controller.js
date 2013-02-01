@@ -1,5 +1,5 @@
 ﻿App.ApiController = Ember.Controller.extend({
-    resources: ['Document'],
+    resources: ['Document', 'Attachment'],
     current: 'Document',
     
     pluralize: function (name) {
@@ -14,6 +14,7 @@
     }.property('current'),
 
     select: function (resource) {
+        this.set('results', null);
         this.set('current', resource);
     },
     buildUrl: function () {

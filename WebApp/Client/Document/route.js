@@ -11,7 +11,7 @@
             document.transaction.commit();
             this.transitionTo('documents');
         }
-    },
+    }
 });
 
 App.DocumentsIndexRoute = App.AuthRoute.extend({
@@ -22,6 +22,9 @@ App.DocumentsIndexRoute = App.AuthRoute.extend({
     },
     model: function () {
         return App.Document.all();
+    },
+    renderTemplate: function () {
+        this.render({ into: 'application' });
     }
 });
 

@@ -41,6 +41,22 @@
             });
         }
 
+        [HttpPost]
+        public ActionResult UploadToDocument(string id)
+        {
+            return this.UploadFiles(files =>
+            {
+                var gfs = Context.Database.GridFS;
+                var document = Documents.Get(id);
+                foreach (var file in files)
+                {
+                    var info = gfs.Upload(file.InputStream, file.FileName);
+                    document.attachments.Add(info.Id.AsObjectId);
+                }
+                Documents.Edit(id, document);
+            });
+        }
+
         [HttpGet]
         public ActionResult Download(string id)
         {

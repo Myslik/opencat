@@ -6,6 +6,7 @@
 });
 
 App.ready = function () {
+    App.Language.find();
     App.Document.find();
 };
 

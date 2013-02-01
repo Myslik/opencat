@@ -45,10 +45,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Ember.Handlebars, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\csharp-ember-handlebars-compiler.1.1.0\lib\net45\Ember.Handlebars.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MongoDB.Bson">
       <HintPath>..\packages\mongocsharpdriver.1.7\lib\net35\MongoDB.Bson.dll</HintPath>
@@ -136,6 +132,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Compiler\Handlebars.cs" />
+    <Compile Include="Compiler\ScriptEngine.cs" />
     <Compile Include="Controllers\API\AttachmentsController.cs" />
     <Compile Include="Controllers\AttachmentsController.cs" />
     <Compile Include="Controllers\API\DocumentsController.cs" />
@@ -171,6 +169,7 @@
     <Content Include="Client\Document\route.js" />
     <Content Include="Client\Document\view.js" />
     <Content Include="Client\Helpers.js" />
+    <Content Include="Client\Language\model.js" />
     <Content Include="Client\Router.js" />
     <Content Include="Client\Store.js" />
     <Content Include="Client\Templates\application.html" />
@@ -180,6 +179,8 @@
     <Content Include="Client\Templates\Document\new.html" />
     <Content Include="Client\Templates\api.html" />
     <Content Include="Client\Templates\index.html" />
+    <EmbeddedResource Include="Compiler\compiler.js" />
+    <EmbeddedResource Include="Compiler\sandbox.js" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -201,7 +202,6 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ember.js" />
     <Content Include="Scripts\ember-data.js" />
-    <Content Include="Scripts\ember-data.min.js" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\fileuploader.js" />
     <Content Include="Scripts\jquery-1.9.0.js" />
