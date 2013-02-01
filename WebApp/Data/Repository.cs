@@ -4,6 +4,7 @@
     using MongoDB.Driver;
     using MongoDB.Driver.Builders;
     using OpenCat.Models;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -56,6 +57,7 @@
 
         public void Create(T entity)
         {
+            entity.created_at = DateTime.UtcNow;
             Collection.Insert(entity);
         }
 

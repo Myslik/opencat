@@ -1,24 +1,30 @@
-﻿<div class="btn-toolbar">
-    <button type="button" class="btn btn-primary" {{action "create"}}>New</button>
-    <button type="button" class="btn" {{action "reload"}}>Reload</button>
+﻿<div class="row">
+    <div class="span3">
+        <img class="img-polaroid" alt="placeholder" src="http://placehold.it/200x200" />
+        <h3>Documents</h3>
+        <p>You have {{length}} documents.</p>
+    </div>
+    <div class="span9">
+        <div class="btn-toolbar pull-right" style="margin: 0;">
+            <button type="button" class="btn btn-primary" {{action "create"}}>New</button>
+            <button type="button" class="btn" {{action "reload"}}>Reload</button>
+        </div>
+        <input type="text" placeholder="Search in documents..." />
+        <ul class="unstyled" style="border-top: 1px solid #eee;">
+            {{#each document in controller}}
+            <li style="margin: 10px 0; border-bottom: 1px solid #eee;">
+                <ul class="inline pull-right">
+                    <li><a href="#" {{action "remove" document}}><i class="icon-trash"></i></a></li>
+                </ul>
+                <h4 style="margin: 0;">
+                    <img alt="document" src="/Images/book.png" style="" />
+                    <a href="#" {{action "show" document}}>{{document.name}}</a>
+                </h4>
+                <div style="margin-left: 40px;">
+                    <p class="muted">{{ago document.createdAt}}</p>
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
 </div>
-<table class="table table-condensed table-hover">
-    <thead>
-        <tr>
-            <th style="width: 200px;">ID</th>
-            <th>Name</th>
-            <th>Words</th>
-            <th style="width: 80px;"></th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each document in controller}}
-            <tr style="cursor: pointer;">
-                <td>{{document.id}}</td>
-                <td><a href="#" {{action "show" document}}>{{document.name}}</a></td>
-                <td>{{document.words}}</td>
-                <td><a href="#" {{action "remove" document}}>Remove</a></td>
-            </tr>
-        {{/each}}
-    </tbody>
-</table>

@@ -170,6 +170,7 @@
     <Content Include="Client\Document\model.js" />
     <Content Include="Client\Document\route.js" />
     <Content Include="Client\Document\view.js" />
+    <Content Include="Client\Helpers.js" />
     <Content Include="Client\Router.js" />
     <Content Include="Client\Store.js" />
     <Content Include="Client\Templates\application.html" />
