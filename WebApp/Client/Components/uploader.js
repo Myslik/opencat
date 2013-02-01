@@ -1,5 +1,5 @@
 ﻿App.Uploader = Ember.View.extend({
-    template: Ember.Handlebars.compile('<i class="icon-upload"></i> Upload'),
+    template: Ember.Handlebars.compile('<i class="icon-upload icon-white"></i> Upload'),
     tagName: 'a',
     classNames: ['btn'],
 

@@ -7,10 +7,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                <a href="#/" class="brand">OpenCAT</a>
+                <div class="nav">
+                    {{view App.Uploader url="/attachments/upload" classNames="btn btn-success"}}
+                </div>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
-                        <li>{{#linkTo index}}Index{{/linkTo}}
-                        </li>
                         <li>{{#linkTo documents}}Documents{{/linkTo}}
                         </li>
                         <li>{{#linkTo api}}API{{/linkTo}}

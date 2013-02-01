@@ -9,5 +9,10 @@ App.Attachment = DS.Model.extend({
     contentType: attr('string'),
 
     // Relationships
-    document: DS.belongsTo('App.Document')
+    document: DS.belongsTo('App.Document'),
+
+    // Computed
+    link: function () {
+        return '/attachments/download/%@'.fmt(this.get('id'));
+    }.property('id')
 });

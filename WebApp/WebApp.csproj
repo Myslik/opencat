@@ -161,19 +161,19 @@
   <ItemGroup>
     <Content Include="Client\Api\controller.js" />
     <Content Include="Client\App.js" />
-    <Content Include="Client\Attachments\controller.js" />
-    <Content Include="Client\Attachments\model.js" />
-    <Content Include="Client\Attachments\view.js" />
+    <Content Include="Client\Attachment\controller.js" />
+    <Content Include="Client\Attachment\model.js" />
+    <Content Include="Client\Attachment\view.js" />
     <Content Include="Client\Components\languages.js" />
     <Content Include="Client\Components\uploader.js" />
-    <Content Include="Client\Documents\controller.js" />
-    <Content Include="Client\Documents\model.js" />
-    <Content Include="Client\Documents\route.js" />
-    <Content Include="Client\Documents\view.js" />
+    <Content Include="Client\Document\controller.js" />
+    <Content Include="Client\Document\model.js" />
+    <Content Include="Client\Document\route.js" />
+    <Content Include="Client\Document\view.js" />
     <Content Include="Client\Router.js" />
     <Content Include="Client\Store.js" />
     <Content Include="Client\Templates\application.html" />
-    <Content Include="Client\Templates\Attachment\list.html" />
+    <Content Include="Client\Templates\Attachment\item.html" />
     <Content Include="Client\Templates\Document\edit.html" />
     <Content Include="Client\Templates\Document\list.html" />
     <Content Include="Client\Templates\Document\new.html" />
@@ -186,6 +186,8 @@
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\select2.css" />
+    <Content Include="Images\book.png" />
+    <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\select2.js" />
     <Content Include="Scripts\select2.min.js" />
     <Content Include="Images\select2.png" />
