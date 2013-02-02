@@ -145,14 +145,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Data\DataContext.cs" />
-    <Compile Include="Models\Attachment.cs" />
-    <Compile Include="Models\Job.cs" />
-    <Compile Include="Models\DTO.cs" />
-    <Compile Include="Models\Entity.cs" />
-    <Compile Include="Data\Generator.cs" />
-    <Compile Include="Models\Language.cs" />
-    <Compile Include="Data\Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transforms\TemplateTransform.cs" />
   </ItemGroup>
@@ -234,6 +226,12 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{32395258-89ff-4839-95de-b95145ff7fed}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
