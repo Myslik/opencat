@@ -162,6 +162,7 @@
     <Content Include="Client\Attachment\controller.js" />
     <Content Include="Client\Attachment\model.js" />
     <Content Include="Client\Attachment\view.js" />
+    <Content Include="Client\Components\editor.js" />
     <Content Include="Client\Components\languages.js" />
     <Content Include="Client\Components\uploader.js" />
     <Content Include="Client\Document\controller.js" />
@@ -173,6 +174,7 @@
     <Content Include="Client\Store.js" />
     <Content Include="Client\Templates\application.html" />
     <Content Include="Client\Templates\attachment\item.html" />
+    <Content Include="Client\Templates\components\editor.html" />
     <Content Include="Client\Templates\document.html" />
     <Content Include="Client\Templates\documents\index.html" />
     <Content Include="Client\Templates\documents\new.html" />
