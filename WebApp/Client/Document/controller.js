@@ -10,9 +10,4 @@
 
 App.DocumentsNewController = Ember.ObjectController.extend();
 
-App.DocumentController = Ember.ObjectController.extend({
-    uploadLink: function () {
-        if (!this.get('content.id')) return;
-        return '/attachments/uploadtodocument/%@'.fmt(this.get('content.id'));
-    }.property('content.id')
-});
+App.DocumentController = Ember.ObjectController.extend();

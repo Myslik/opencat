@@ -41,6 +41,7 @@
 
         public void Delete(string id)
         {
+            Documents.Collection.Update(Query.Exists("attachments"), Update.Pull("attachments", BsonObjectId.Parse(id)));
             Context.Database.GridFS.DeleteById(ObjectId.Parse(id));
         }
     }

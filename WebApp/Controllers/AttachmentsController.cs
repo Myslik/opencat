@@ -2,6 +2,7 @@
 {
     using MongoDB.Bson;
     using MongoDB.Driver.Builders;
+    using MongoDB.Driver.GridFS;
     using OpenCat.Data;
     using OpenCat.Models;
     using System;
@@ -20,24 +21,44 @@
             Documents = new Repository<Document>(Context);
         }
 
+        [NonAction]
+        private Document CreateDocument()
+        {
+            var document = new Document
+            {
+                name = DateTime.Now.Ticks.ToString(),
+                words = 0,
+                attachments = new List<ObjectId>()
+            };
+            Documents.Create(document);
+            return document;
+        }
+
+        [NonAction]
+        private Document UploadFile(Document document, UploadedFile file)
+        {
+            var gfs = Context.Database.GridFS;
+            var options = new MongoGridFSCreateOptions
+            {
+                Metadata = new BsonDocument(new BsonElement ("document_id", document.id))
+            };
+            var info = gfs.Upload(file.InputStream, file.FileName, options);
+            if (document.attachments == null) document.attachments = new List<ObjectId>();
+            document.attachments.Add(info.Id.AsObjectId);
+            return document;
+        }
+
         [HttpPost]
         public ActionResult Upload()
         {
             return this.UploadFiles(files =>
             {
-                var gfs = Context.Database.GridFS;
-                var document = new Document
-                {
-                    name = DateTime.Now.Ticks.ToString(),
-                    words = 0,
-                    attachments = new List<ObjectId>()
-                };
+                var document = CreateDocument();
                 foreach (var file in files)
                 {
-                    var info = gfs.Upload(file.InputStream, file.FileName);
-                    document.attachments.Add(info.Id.AsObjectId);
+                    document = UploadFile(document, file);
                 }
-                Documents.Create(document);
+                Documents.Edit(document.id, document);
             });
         }
 
@@ -46,14 +67,12 @@
         {
             return this.UploadFiles(files =>
             {
-                var gfs = Context.Database.GridFS;
                 var document = Documents.Get(id);
                 foreach (var file in files)
                 {
-                    var info = gfs.Upload(file.InputStream, file.FileName);
-                    document.attachments.Add(info.Id.AsObjectId);
+                    document = UploadFile(document, file);
                 }
-                Documents.Edit(id, document);
+                Documents.Edit(document.id, document);
             });
         }
 

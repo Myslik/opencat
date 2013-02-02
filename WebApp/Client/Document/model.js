@@ -9,5 +9,5 @@ App.Document = DS.Model.extend({
     attachments: attr('array'),
 
     // Relationships
-    attachments: DS.hasMany('App.Attachment')
+    attachments: DS.hasMany('App.Attachment', { key: 'attachments' })
 });

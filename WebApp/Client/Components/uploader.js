@@ -33,3 +33,16 @@
         this.didActionChanged();
     }
 });
+
+App.UploaderToDocument = App.Uploader.extend({
+    url: function () {
+        if (!this.get('document.id')) return;
+        return '/attachments/uploadtodocument/%@'.fmt(this.get('document.id'));
+    }.property('document.id'),
+
+    didComplete: function () {
+        if (this.get('document')) {
+            this.get('document').reload();
+        }
+    }
+});

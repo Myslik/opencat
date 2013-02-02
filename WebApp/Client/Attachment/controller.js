@@ -1,6 +1,6 @@
 ﻿App.AttachmentsController = Ember.ArrayController.extend({
-    remove: function (attachment) {
+    removeAttachment: function (attachment) {
         attachment.deleteRecord();
-        attachment.transaction.commit();
+        attachment.store.commit();
     }
 });
