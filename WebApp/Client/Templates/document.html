@@ -2,19 +2,19 @@
     <div class="control-group">
         <label class="control-label" for="name">Name</label>
         <div class="controls">
-            {{view Ember.TextField valueBinding="content.name"}}
+            {{view App.TextEditor valueBinding="content.name"}}
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="description">Description</label>
         <div class="controls">
-            {{view Ember.TextField valueBinding="content.description"}}
+            {{view App.TextEditor valueBinding="content.description"}}
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="words">Words</label>
         <div class="controls">
-            {{view Ember.TextField valueBinding="content.words"}}
+            {{view App.TextEditor valueBinding="content.words"}}
         </div>
     </div>
     <div class="control-group">
@@ -24,8 +24,4 @@
         </div>
     </div>
     {{outlet attachments}}
-    <div class="form-actions">
-        <button class="btn btn-primary" {{action "update" content}}>Save changes</button>
-        <button class="btn" {{action "cancel" content}}>Cancel</button>
-    </div>
 </form>

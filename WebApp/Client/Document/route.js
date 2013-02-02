@@ -48,15 +48,9 @@ App.DocumentsNewRoute = App.AuthRoute.extend({
 });
 
 App.DocumentRoute = App.AuthRoute.extend({
-    events: {
-        update: function (document) {
-            document.transaction.commit();
-            this.transitionTo('documents');
-        },
-        cancel: function (document) {
-            document.transaction.rollback();
-            this.transitionTo('documents');
-        }
+    exit: function () {
+        var document = this.get('currentModel');
+        document.transaction.rollback();
     },
     setupController: function(controller, model) {
         controller.set('content', model);
