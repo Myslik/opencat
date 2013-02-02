@@ -1,10 +1,6 @@
-﻿App.AttachmentsView = Ember.CollectionView.extend({
-    tagName: 'ul',
-    classNames: ['unstyled'],
+﻿App.AttachmentsView = Ember.View.extend({
+    tagName: 'table',
     attributeBindings: ['style'],
-    style: 'margin-left: 180px;',
-    contentBinding: 'controller',
-    itemViewClass: Ember.View.extend({
-        templateName: 'attachment/item',
-    })
+    style: 'width: 100%;',
+    templateName: 'attachment/index'
 });

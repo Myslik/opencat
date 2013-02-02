@@ -12,10 +12,27 @@
 
     App.TextEditor = Ember.ContainerView.extend({
         classNames: ['editor'],
-        childViews: ['viewing'],
+        childViews: [],
+
+        didInsertElement: function () {
+            this.pushObject(this.viewing());
+        },
+
         viewing: function () {
+            return this.get('value') ? this.get('show') : this.get('empty');
+        },
+        empty: function () {
             return Ember.View.create({
-                tagNameBinding: 'parentView.viewingTag',
+                classNames: ['muted'],
+                template: Ember.Handlebars.compile('Click here to edit...'),
+                click: function (event) {
+                    this.get('parentView').startEdit();
+                    event.stopPropagation();
+                }
+            });
+        }.property(),
+        show: function () {
+            return Ember.View.create({
                 template: Ember.Handlebars.compile('{{view.parentView.value}}'),
                 click: function (event) {
                     this.get('parentView').startEdit();
@@ -47,7 +64,7 @@
         }.property(),
 
         startEdit: function () {
-            this.removeObject(this.get('viewing'));
+            this.removeObject(this.viewing());
             this.set('editing.value', this.get('value'));
             this.pushObject(this.get('editing'));
             this.get('editing').focus();
@@ -61,9 +78,9 @@
         },
         close: function () {
             this.removeObject(this.get('editing'));
-            this.pushObject(this.get('viewing'));
+            this.pushObject(this.viewing());
             openedEditor = null;
-        }
+        },
     });
 
 })();

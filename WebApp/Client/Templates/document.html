@@ -1,27 +1,11 @@
-﻿<form class="form-horizontal">
-    <div class="control-group">
-        <label class="control-label" for="name">Name</label>
-        <div class="controls">
-            {{view App.TextEditor valueBinding="content.name"}}
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="description">Description</label>
-        <div class="controls">
-            {{view App.TextEditor valueBinding="content.description"}}
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="words">Words</label>
-        <div class="controls">
-            {{view App.TextEditor valueBinding="content.words"}}
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label"></label>
-        <div class="controls">
-            {{view App.UploaderToDocument documentBinding="content" classNames="btn btn-success"}}
-        </div>
-    </div>
+﻿<h3 style="margin: 0;">
+    <img alt="document" src="/Images/book.png" style="float: left; margin-right: 10px;" />
+    {{view App.TextEditor valueBinding="content.name"}}
+</h3>
+<hr class="clearfix" style="margin: 10px 0;" />
+{{view App.TextEditor valueBinding="content.description"}}
+<div class="table-attachments" style="margin-top: 40px;">
+    <div style="padding: 8px; background-color: #fafafa;">Attachments {{view App.UploaderToDocument documentBinding="content" classNames="btn btn-mini btn-success pull-right"}}</div>
     {{outlet attachments}}
-</form>
+</div>
+
