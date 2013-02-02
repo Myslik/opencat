@@ -7,9 +7,9 @@
 
 App.Router.map(function () {
     this.route('index', { path: '/' });
-    this.resource('documents', function () {
+    this.resource('jobs', function () {
         this.route('new');
     });
-    this.resource('document', { path: '/documents/:document_id' });
+    this.resource('job', { path: '/jobs/:job_id' });
     this.route('api');
 });

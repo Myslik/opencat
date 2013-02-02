@@ -9,7 +9,7 @@ App.Attachment = DS.Model.extend({
     contentType: attr('string'),
 
     // Relationships
-    document: DS.belongsTo('App.Document', { key: 'document_id' }),
+    job: DS.belongsTo('App.Job', { key: 'job_id' }),
 
     // Computed
     link: function () {

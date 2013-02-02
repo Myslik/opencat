@@ -7,7 +7,7 @@
 
 App.ready = function () {
     App.Language.find();
-    App.Document.find();
+    App.Job.find();
 };
 
 App.ApplicationController = Ember.Controller.extend();

@@ -34,15 +34,15 @@
     }
 });
 
-App.UploaderToDocument = App.Uploader.extend({
+App.UploaderToJob = App.Uploader.extend({
     url: function () {
-        if (!this.get('document.id')) return;
-        return '/attachments/uploadtodocument/%@'.fmt(this.get('document.id'));
-    }.property('document.id'),
+        if (!this.get('job.id')) return;
+        return '/attachments/uploadtojob/%@'.fmt(this.get('job.id'));
+    }.property('job.id'),
 
     didComplete: function () {
-        if (this.get('document')) {
-            this.get('document').reload();
+        if (this.get('job')) {
+            this.get('job').reload();
         }
     }
 });

@@ -12,12 +12,12 @@
     public class AttachmentsController : ApiController
     {
         private DataContext Context { get; set; }
-        private Repository<Document> Documents { get; set; }
+        private Repository<Job> Jobs { get; set; }
 
         public AttachmentsController()
         {
             Context = new DataContext();
-            Documents = new Repository<Document>(Context);
+            Jobs = new Repository<Job>(Context);
         }
 
         public DTO Get([FromUri] string[] ids)
@@ -41,7 +41,7 @@
 
         public void Delete(string id)
         {
-            Documents.Collection.Update(Query.Exists("attachments"), Update.Pull("attachments", BsonObjectId.Parse(id)));
+            Jobs.Collection.Update(Query.Exists("attachments"), Update.Pull("attachments", BsonObjectId.Parse(id)));
             Context.Database.GridFS.DeleteById(ObjectId.Parse(id));
         }
     }

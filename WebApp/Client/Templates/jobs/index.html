@@ -1,31 +1,31 @@
 ﻿<div class="row">
     <div class="span3">
         <img class="img-polaroid" alt="placeholder" src="http://placehold.it/200x200" />
-        <h3>Documents</h3>
-        <p>You have {{length}} documents.</p>
+        <h3>Jobs</h3>
+        <p>You have {{length}} jobs.</p>
     </div>
     <div class="span9">
         <div class="btn-toolbar pull-right" style="margin: 0;">
             <button type="button" class="btn btn-primary" {{action "create"}}>New</button>
             <button type="button" class="btn" {{action "reload"}}>Reload</button>
         </div>
-        {{view Ember.TextField placeholder="Filter by document name..." valueBinding="nameFilter"}}
+        {{view Ember.TextField placeholder="Filter by job name..." valueBinding="nameFilter"}}
         <ul class="unstyled" style="border-top: 1px solid #eee;">
-            {{#each document in controller.filteredContent}}
+            {{#each job in controller.filteredContent}}
             <li style="margin: 10px 0; border-bottom: 1px solid #eee;">
                 <ul class="inline pull-right">
-                    <li style="width: 70px;"><strong>W</strong> {{document.words}}</li>
-                    <li><a href="#" {{action "remove" document}}><i class="icon-trash"></i></a></li>
+                    <li style="width: 70px;"><strong>W</strong> {{job.words}}</li>
+                    <li><a href="#" {{action "remove" job}}><i class="icon-trash"></i></a></li>
                 </ul>
                 <h4 style="margin: 0;">
-                    <img alt="document" src="/Images/book.png" style="" />
-                    <a href="#" {{action "show" document}}>{{document.name}}</a>
+                    <img alt="job" src="/Images/book.png" style="" />
+                    <a href="#" {{action "show" job}}>{{job.name}}</a>
                 </h4>
                 <div style="margin-left: 40px;">
-                    {{#if document.description}}
-                        <p>{{document.description}}</p>
+                    {{#if job.description}}
+                        <p>{{job.description}}</p>
                     {{/if}}
-                    <p class="muted" style="font-size: 12px;">{{ago document.createdAt}}</p>
+                    <p class="muted" style="font-size: 12px;">{{ago job.createdAt}}</p>
                 </div>
             </li>
             {{/each}}

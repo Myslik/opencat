@@ -4,9 +4,9 @@
 
     public class DTO
     {
-        // Document
-        public Document document { get; set; }
-        public IEnumerable<Document> documents { get; set; }
+        // Job
+        public Job job { get; set; }
+        public IEnumerable<Job> jobs { get; set; }
         // Attachment
         public Attachment attachment { get; set; }
         public IEnumerable<Attachment> attachments { get; set; }

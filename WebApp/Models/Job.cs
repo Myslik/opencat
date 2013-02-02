@@ -4,7 +4,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class Document : Entity
+    public class Job : Entity
     {
         public string name { get; set; }
         public string description { get; set; }

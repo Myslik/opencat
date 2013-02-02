@@ -11,7 +11,7 @@
         public string md5 { get; set; }
         public DateTime uploaded_at { get; set; }
         public string content_type { get; set; }
-        public string document_id { get; set; }
+        public string job_id { get; set; }
 
         public static Attachment FromFileInfo(MongoGridFSFileInfo info)
         {
@@ -24,9 +24,9 @@
                 uploaded_at = info.UploadDate,
                 content_type = info.ContentType
             };
-            if (info.Metadata.Contains("document_id"))
+            if (info.Metadata.Contains("job_id"))
             {
-                attachment.document_id = info.Metadata["document_id"].AsObjectId.ToString();
+                attachment.job_id = info.Metadata["job_id"].AsObjectId.ToString();
             }
             return attachment;
         }

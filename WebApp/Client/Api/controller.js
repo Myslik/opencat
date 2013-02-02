@@ -1,6 +1,6 @@
 ﻿App.ApiController = Ember.Controller.extend({
-    resources: ['Document', 'Attachment'],
-    current: 'Document',
+    resources: ['Job', 'Attachment'],
+    current: 'Job',
     
     pluralize: function (name) {
         return name + 's';

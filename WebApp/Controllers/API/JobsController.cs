@@ -6,36 +6,36 @@
     using System.Net.Http;
     using System.Web.Http;
 
-    public class DocumentsController : ApiController
+    public class JobsController : ApiController
     {
-        public Repository<Document> Repository { get; set; }
+        public Repository<Job> Repository { get; set; }
 
-        public DocumentsController()
+        public JobsController()
         {
-            Repository = new Repository<Document>();
+            Repository = new Repository<Job>();
         }
 
         public DTO Get()
         {
-            return new DTO { documents = Repository.Get() };
+            return new DTO { jobs = Repository.Get() };
         }
 
         public DTO Get(string id)
         {
-            var document = Repository.Get(id);
-            if (document == null) throw new HttpResponseException(HttpStatusCode.NotFound);
-            return new DTO { document = document };
+            var job = Repository.Get(id);
+            if (job == null) throw new HttpResponseException(HttpStatusCode.NotFound);
+            return new DTO { job = job };
         }
 
         public DTO Post(DTO dto)
         {
-            Repository.Create(dto.document);
+            Repository.Create(dto.job);
             return dto;
         }
 
         public DTO Put(string id, DTO dto)
         {
-            var ok = Repository.Edit(id, dto.document);
+            var ok = Repository.Edit(id, dto.job);
             if (!ok) throw new HttpResponseException(HttpStatusCode.BadRequest);
             return dto;
         }

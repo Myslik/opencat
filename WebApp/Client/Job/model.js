@@ -1,6 +1,6 @@
 ﻿var attr = DS.attr;
 
-App.Document = DS.Model.extend({
+App.Job = DS.Model.extend({
     // Attributes
     createdAt: attr('date'),
     name: attr('string'),

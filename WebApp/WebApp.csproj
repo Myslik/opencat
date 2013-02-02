@@ -136,7 +136,7 @@
     <Compile Include="Compiler\ScriptEngine.cs" />
     <Compile Include="Controllers\API\AttachmentsController.cs" />
     <Compile Include="Controllers\AttachmentsController.cs" />
-    <Compile Include="Controllers\API\DocumentsController.cs" />
+    <Compile Include="Controllers\API\JobsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\API\LanguagesController.cs" />
     <Compile Include="Converters\MongoConverter.cs" />
@@ -147,7 +147,7 @@
     </Compile>
     <Compile Include="Data\DataContext.cs" />
     <Compile Include="Models\Attachment.cs" />
-    <Compile Include="Models\Document.cs" />
+    <Compile Include="Models\Job.cs" />
     <Compile Include="Models\DTO.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Data\Generator.cs" />
@@ -165,19 +165,20 @@
     <Content Include="Client\Components\editor.js" />
     <Content Include="Client\Components\languages.js" />
     <Content Include="Client\Components\uploader.js" />
-    <Content Include="Client\Document\controller.js" />
-    <Content Include="Client\Document\model.js" />
-    <Content Include="Client\Document\route.js" />
+    <Content Include="Client\Job\controller.js" />
+    <Content Include="Client\Job\model.js" />
+    <Content Include="Client\Job\route.js" />
     <Content Include="Client\Helpers.js" />
     <Content Include="Client\Language\model.js" />
     <Content Include="Client\Router.js" />
     <Content Include="Client\Store.js" />
     <Content Include="Client\Templates\application.html" />
     <Content Include="Client\Templates\attachment\index.html" />
+    <Content Include="Client\Templates\components\editorArea.html" />
     <Content Include="Client\Templates\components\editor.html" />
-    <Content Include="Client\Templates\document.html" />
-    <Content Include="Client\Templates\documents\index.html" />
-    <Content Include="Client\Templates\documents\new.html" />
+    <Content Include="Client\Templates\job.html" />
+    <Content Include="Client\Templates\jobs\index.html" />
+    <Content Include="Client\Templates\jobs\new.html" />
     <Content Include="Client\Templates\api.html" />
     <Content Include="Client\Templates\index.html" />
     <EmbeddedResource Include="Compiler\compiler.js" />

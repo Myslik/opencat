@@ -10,6 +10,10 @@
         }
     });
 
+    Ember.TextArea.reopen({
+        attributeBindings: ['rows', 'cols', 'style']
+    });
+
     App.TextEditor = Ember.ContainerView.extend({
         classNames: ['editor'],
         childViews: [],
@@ -81,6 +85,31 @@
             this.pushObject(this.viewing());
             openedEditor = null;
         },
+    });
+
+    App.TextAreaEditor = App.TextEditor.extend({
+        editing: function () {
+            return Ember.View.create({
+                templateName: 'components/editorArea',
+                click: function (event) {
+                    event.stopPropagation();
+                },
+                keyDown: function (event) {
+                    if (event.keyCode == 27) {
+                        this.get('parentView').close();
+                    } else if (event.keyCode == 13) {
+                        this.get('parentView').save(this.get('value'));
+                    }
+                },
+                focus: function () {
+                    Ember.run.sync();
+                    Ember.run.later(this, function () {
+                        this.$('textarea').focus();
+                        this.$('textarea').select();
+                    }, 100);
+                }
+            });
+        }.property(),
     });
 
 })();

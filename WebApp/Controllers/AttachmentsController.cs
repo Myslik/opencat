@@ -13,39 +13,39 @@
     public class AttachmentsController : Controller
     {
         private DataContext Context { get; set; }
-        private Repository<Document> Documents { get; set; }
+        private Repository<Job> Jobs { get; set; }
 
         public AttachmentsController()
         {
             Context = new DataContext();
-            Documents = new Repository<Document>(Context);
+            Jobs = new Repository<Job>(Context);
         }
 
         [NonAction]
-        private Document CreateDocument()
+        private Job CreateJob()
         {
-            var document = new Document
+            var job = new Job
             {
                 name = DateTime.Now.Ticks.ToString(),
                 words = 0,
                 attachments = new List<ObjectId>()
             };
-            Documents.Create(document);
-            return document;
+            Jobs.Create(job);
+            return job;
         }
 
         [NonAction]
-        private Document UploadFile(Document document, UploadedFile file)
+        private Job UploadFile(Job job, UploadedFile file)
         {
             var gfs = Context.Database.GridFS;
             var options = new MongoGridFSCreateOptions
             {
-                Metadata = new BsonDocument(new BsonElement ("document_id", document.id))
+                Metadata = new BsonDocument(new BsonElement ("job_id", job.id))
             };
             var info = gfs.Upload(file.InputStream, file.FileName, options);
-            if (document.attachments == null) document.attachments = new List<ObjectId>();
-            document.attachments.Add(info.Id.AsObjectId);
-            return document;
+            if (job.attachments == null) job.attachments = new List<ObjectId>();
+            job.attachments.Add(info.Id.AsObjectId);
+            return job;
         }
 
         [HttpPost]
@@ -53,26 +53,26 @@
         {
             return this.UploadFiles(files =>
             {
-                var document = CreateDocument();
+                var job = CreateJob();
                 foreach (var file in files)
                 {
-                    document = UploadFile(document, file);
+                    job = UploadFile(job, file);
                 }
-                Documents.Edit(document.id, document);
+                Jobs.Edit(job.id, job);
             });
         }
 
         [HttpPost]
-        public ActionResult UploadToDocument(string id)
+        public ActionResult UploadToJob(string id)
         {
             return this.UploadFiles(files =>
             {
-                var document = Documents.Get(id);
+                var job = Jobs.Get(id);
                 foreach (var file in files)
                 {
-                    document = UploadFile(document, file);
+                    job = UploadFile(job, file);
                 }
-                Documents.Edit(document.id, document);
+                Jobs.Edit(job.id, job);
             });
         }
 
