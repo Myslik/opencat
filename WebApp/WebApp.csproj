@@ -132,8 +132,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Compiler\Handlebars.cs" />
-    <Compile Include="Compiler\ScriptEngine.cs" />
     <Compile Include="Controllers\API\AttachmentsController.cs" />
     <Compile Include="Controllers\AttachmentsController.cs" />
     <Compile Include="Controllers\API\JobsController.cs" />
@@ -173,8 +171,6 @@
     <Content Include="Client\Templates\jobs\new.html" />
     <Content Include="Client\Templates\api.html" />
     <Content Include="Client\Templates\index.html" />
-    <EmbeddedResource Include="Compiler\compiler.js" />
-    <EmbeddedResource Include="Compiler\sandbox.js" />
     <Content Include="Content\attachments.css" />
     <Content Include="Content\editor.css" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />

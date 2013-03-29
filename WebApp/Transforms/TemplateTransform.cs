@@ -4,27 +4,32 @@
     using System;
     using System.IO;
     using System.Linq;
+    using System.Text;
+    using System.Text.RegularExpressions;
     using System.Web.Optimization;
 
     public class TemplateTransform : IBundleTransform
     {
-        private string virtualRootPath;
+        private const string templateFolder = "~/Client/templates/";
+        private const string templateFormat = "Ember.TEMPLATES[\"{0}\"] = Ember.Handlebars.compile(\"{1}\");\n";
+        private Regex extension = new Regex(@"\.hbs\.html$");
 
-        public TemplateTransform(string virtualRootPath)
+        public TemplateTransform()
         {
-            this.virtualRootPath = virtualRootPath;
         }
 
         public void Process(BundleContext context, BundleResponse response)
         {
-            var builder = new OpenCat.TemplateBuilder();
-            var rootPath = new Uri(context.HttpContext.Server.MapPath(virtualRootPath));
+            var builder = new StringBuilder();
+            var rootPath = new Uri(context.HttpContext.Server.MapPath(templateFolder));
             foreach (var info in response.Files)
             {
                 using (var reader = info.OpenText())
                 {
-                    var name = rootPath.MakeRelativeUri(new Uri(info.FullName)).ToString();
-                    builder.Register(Path.ChangeExtension(name, null).Replace(Path.DirectorySeparatorChar, '/'), reader.ReadToEnd());
+                    var path = rootPath.MakeRelativeUri(new Uri(info.FullName)).ToString();
+                    var name = Path.ChangeExtension(path, null).Replace(Path.DirectorySeparatorChar, '/');
+                    var template = reader.ReadToEnd().Replace("\r\n", "").Replace("\n", "").Replace("\"", "\\\"");
+                    builder.AppendLine(String.Format(templateFormat, name, template));
                 }
             }
             var minifier = new Minifier();
