@@ -2,18 +2,96 @@
     Layout = null;
 }
 
-@if (ViewData["Message"] != null) {
-	<div style="border: solid 1px red">
-		@Html.Encode(ViewData["Message"].ToString())
-	</div>
-}
-<p>You must log in before entering the Members Area: </p>
-<form action="Login" method="post">
-    <label for="loginIdentifier">OpenID: </label>
-    <input id="loginIdentifier" name="loginIdentifier" size="40" value="https://www.google.com/accounts/o8/id" />
-    <input type="submit" value="Login" />
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>OpenCAT</title>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" />
+    <style type="text/css">
+        body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #f5f5f5;
+        }
 
-<script type="text/javascript">
-    document.getElementById("openid_identifier").focus();
-</script>
+        .form-signin {
+            max-width: 300px;
+            padding: 19px 29px 29px;
+            margin: 0 auto 20px;
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            box-shadow: 0 1px 2px rgba(0,0,0,.05);
+        }
+
+            .form-signin .form-signin-heading,
+            .form-signin .checkbox {
+                margin-bottom: 10px;
+            }
+
+            .form-signin input[type="text"],
+            .form-signin input[type="password"] {
+                font-size: 16px;
+                height: auto;
+                margin-bottom: 15px;
+                padding: 7px 9px;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <form class="form-signin" method="POST">
+            <h2 class="form-signin-heading">Please sign in</h2>
+
+            <input type="hidden" id="loginIdentifier" name="loginIdentifier" size="40" />
+
+            <input id="email" name="email" type="text" class="input-block-level" placeholder="Email address">
+            <input id="password" name="password" type="password" class="input-block-level" placeholder="Password">
+
+            @if (ViewData["Message"] != null)
+            {
+                <div class="alert alert-error">@Html.Encode(ViewData["Message"].ToString())</div>
+            }
+
+            <label class="checkbox">
+                <input type="checkbox" value="remember-me">
+                Remember me
+            </label>
+
+            <div class="btn-group">
+                <button class="btn btn-large btn-primary">Sign in</button>
+                <button class="btn btn-large btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="javascript: loginWith('https://www.google.com/accounts/o8/id');">with Google</a></li>
+                </ul>
+            </div>
+        </form>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
+
+    <script type="text/javascript">
+        document.getElementById("email").focus();
+
+        function loginWith(loginIdentifier) {
+            $('#loginIdentifier').val(loginIdentifier);
+            $('.form-signin').submit();
+        }
+    </script>
+</body>
+</html>
+
+
+

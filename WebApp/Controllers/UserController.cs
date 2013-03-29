@@ -19,7 +19,7 @@
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return Redirect("~/Home");
+            return Redirect("~/");
         }
 
         public ActionResult Login()
