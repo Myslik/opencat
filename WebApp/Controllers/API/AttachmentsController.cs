@@ -24,7 +24,7 @@
         {
             if (ids.Length > 0)
             {
-                var query = Query.In("_id", BsonArray.Create(ids.Select(id => ObjectId.Parse(id))));
+                var query = Query.In("_id", new BsonArray(ids.Select(id => ObjectId.Parse(id)).AsEnumerable()));
                 return new DTO { attachments = Context.Database.GridFS.Find(query).Select(info => Attachment.FromFileInfo(info)) };
             }
             return new DTO { attachments = Context.Database.GridFS.FindAll().Select(info => Attachment.FromFileInfo(info)) };
@@ -41,7 +41,7 @@
 
         public void Delete(string id)
         {
-            Jobs.Collection.Update(Query.Exists("attachments"), Update.Pull("attachments", BsonObjectId.Parse(id)));
+            Jobs.Collection.Update(Query.Exists("attachments"), Update.Pull("attachments", new BsonObjectId(ObjectId.Parse(id))));
             Context.Database.GridFS.DeleteById(ObjectId.Parse(id));
         }
     }

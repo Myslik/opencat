@@ -11,7 +11,7 @@
 
         public override object ReadJson(JsonReader reader, System.Type objectType, object existingValue, JsonSerializer serializer)
         {
-            return existingValue == typeof(string) ? MongoDB.Bson.ObjectId.Parse((string)existingValue) : existingValue;
+            return (System.Type)existingValue == typeof(string) ? MongoDB.Bson.ObjectId.Parse((string)existingValue) : existingValue;
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

@@ -1,0 +1,19 @@
+﻿@{
+    Layout = null;
+}
+
+@if (ViewData["Message"] != null) {
+	<div style="border: solid 1px red">
+		@Html.Encode(ViewData["Message"].ToString())
+	</div>
+}
+<p>You must log in before entering the Members Area: </p>
+<form action="Login" method="post">
+    <label for="loginIdentifier">OpenID: </label>
+    <input id="loginIdentifier" name="loginIdentifier" size="40" value="https://www.google.com/accounts/o8/id" />
+    <input type="submit" value="Login" />
+</form>
+
+<script type="text/javascript">
+    document.getElementById("openid_identifier").focus();
+</script>
