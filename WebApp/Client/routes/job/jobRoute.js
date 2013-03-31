@@ -5,7 +5,6 @@
     },
     setupController: function (controller, model) {
         controller.set('content', model);
-        window.model = model;
         this.controllerFor('attachments').set('content', model.get('attachments'));
     },
     renderTemplate: function () {
