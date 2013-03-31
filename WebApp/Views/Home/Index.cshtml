@@ -1,1 +1,18 @@
-﻿
+﻿@model OpenCat.Models.User
+
+@section scripts {
+    @if (User != null)
+    {
+        <script type="text/javascript">
+            App.User = Ember.Controller.extend({
+                name: '@Model.name',
+                email: '@Model.email',
+                gravatar: '@Model.gravatar',
+
+                largeGravatar: function () {
+                    return 'http://www.gravatar.com/avatar/%@@?s=200'.fmt(this.get('gravatar'));
+                }.property('gravatar')
+            });
+        </script>
+    }
+}

@@ -11,16 +11,15 @@
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" />
     <style type="text/css">
-        body {
-            padding-top: 40px;
-            padding-bottom: 40px;
+        body, body > div.container {
+            height: 100%;
             background-color: #f5f5f5;
         }
 
         .form-signin {
             max-width: 300px;
             padding: 19px 29px 29px;
-            margin: 0 auto 20px;
+            margin: -170px auto 20px;
             background-color: #fff;
             border: 1px solid #e5e5e5;
             -webkit-border-radius: 5px;
@@ -29,6 +28,8 @@
             -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
             -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
             box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            position: relative;
+            top: 50%;
         }
 
             .form-signin .form-signin-heading,
@@ -61,11 +62,6 @@
                 <div class="alert alert-error">@Html.Encode(ViewData["Message"].ToString())</div>
             }
 
-            <label class="checkbox">
-                <input type="checkbox" value="remember-me">
-                Remember me
-            </label>
-
             <div class="btn-group">
                 <button class="btn btn-large btn-primary">Sign in</button>
                 <button class="btn btn-large btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -74,6 +70,10 @@
                 <ul class="dropdown-menu">
                     <li><a href="javascript: loginWith('https://www.google.com/accounts/o8/id');">with Google</a></li>
                 </ul>
+            </div>
+
+            <div class="btn-group">
+                <a href="#" class="btn btn-large btn-success disabled">Sign up</a>
             </div>
         </form>
     </div>

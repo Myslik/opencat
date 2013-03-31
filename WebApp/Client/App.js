@@ -1,11 +1,8 @@
-﻿window.App = Ember.Application.create({
-    user: Ember.Object.create({
-        name: 'Premysl Krajcovic',
-        authenticated: true
-    })
-});
+﻿window.App = Ember.Application.create();
 
 App.ready = function () {
+    App.user = App.User.create();
+
     App.Language.find();
     App.Job.find();
 };

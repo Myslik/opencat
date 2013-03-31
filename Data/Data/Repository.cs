@@ -48,7 +48,7 @@
             return Get(ObjectId.Parse(id));
         }
 
-        public IEnumerable<T> Get()
+        public IQueryable<T> Get()
         {
             var result = Collection.FindAll().AsQueryable();
 

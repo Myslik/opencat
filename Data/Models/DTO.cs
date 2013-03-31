@@ -4,6 +4,9 @@
 
     public class DTO
     {
+        // User
+        public User user { get; set; }
+        public IEnumerable<User> users { get; set; }
         // Job
         public Job job { get; set; }
         public IEnumerable<Job> jobs { get; set; }

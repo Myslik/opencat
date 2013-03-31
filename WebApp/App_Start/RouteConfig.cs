@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using OpenCat.Routers;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -11,6 +8,8 @@ namespace OpenCat
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            routes.Add("TemplateRoute", new Route("bundles/templates", new TemplateRouter()));
+
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(

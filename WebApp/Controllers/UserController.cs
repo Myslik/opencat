@@ -4,17 +4,41 @@
     using DotNetOpenAuth.OpenId;
     using DotNetOpenAuth.OpenId.Extensions.SimpleRegistration;
     using DotNetOpenAuth.OpenId.RelyingParty;
-    using System;
-    using System.Collections.Generic;
+    using OpenCat.Data;
+    using OpenCat.Models;
     using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
 
     public class UserController : Controller
     {
         private static OpenIdRelyingParty openid = new OpenIdRelyingParty();
+        private Repository<User> Repository { get; set; }
+
+        public UserController()
+        {
+            Repository = new Repository<User>();
+        }
+
+        private void EnsureUserExists(IAuthenticationResponse response)
+        {
+            if (!Repository.Get().Any(u => u.identifier == response.ClaimedIdentifier.ToString()))
+            {
+                var claim = response.GetExtension<ClaimsResponse>();
+
+                var user = new User
+                {
+                    identifier = response.ClaimedIdentifier.ToString(),
+                    name = claim.FullName,
+                    email = claim.Email
+                };
+
+                user.GeneratePassword();
+                user.ComputeGravatar();
+
+                Repository.Create(user);
+            }
+        }
 
         public ActionResult Logout()
         {
@@ -32,6 +56,7 @@
                 switch (response.Status)
                 {
                     case AuthenticationStatus.Authenticated:
+                        EnsureUserExists(response);
                         FormsAuthentication.RedirectFromLoginPage(
                             response.ClaimedIdentifier, false);
                         break;
@@ -49,7 +74,7 @@
             return View();
         }
 
-        [System.Web.Mvc.AcceptVerbs(HttpVerbs.Post)]
+        [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Login(string loginIdentifier)
         {
             if (!Identifier.IsValid(loginIdentifier))
