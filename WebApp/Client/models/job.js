@@ -9,5 +9,5 @@ App.Job = DS.Model.extend({
     attachments: attr('array'),
 
     // Relationships
-    attachments: DS.hasMany('App.Attachment', { key: 'attachments' })
+    attachments: DS.hasMany('App.Attachment')
 });

@@ -28,7 +28,7 @@
             {
                 name = DateTime.Now.Ticks.ToString(),
                 words = 0,
-                attachments = new List<ObjectId>()
+                attachment_ids = new List<ObjectId>()
             };
             Jobs.Create(job);
             return job;
@@ -43,8 +43,8 @@
                 Metadata = new BsonDocument(new BsonElement ("job_id", job.id))
             };
             var info = gfs.Upload(file.InputStream, file.FileName, options);
-            if (job.attachments == null) job.attachments = new List<ObjectId>();
-            job.attachments.Add(info.Id.AsObjectId);
+            if (job.attachment_ids == null) job.attachment_ids = new List<ObjectId>();
+            job.attachment_ids.Add(info.Id.AsObjectId);
             return job;
         }
 

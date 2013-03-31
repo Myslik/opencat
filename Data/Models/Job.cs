@@ -9,6 +9,6 @@
         public string name { get; set; }
         public string description { get; set; }
         public int words { get; set; }
-        public IList<ObjectId> attachments { get; set; }
+        public IList<ObjectId> attachment_ids { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model OpenCat.Models.User
 
 @section scripts {
-    @if (User != null)
+    @if (Model != null)
     {
         <script type="text/javascript">
             App.User = Ember.Controller.extend({
@@ -13,6 +13,10 @@
                     return 'http://www.gravatar.com/avatar/%@@?s=200'.fmt(this.get('gravatar'));
                 }.property('gravatar')
             });
+        </script>
+    } else {
+        <script type="text/javascript">
+            App.User = Ember.Controller.extend({});
         </script>
     }
 }

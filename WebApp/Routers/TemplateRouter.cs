@@ -25,6 +25,17 @@
             get { return false; }
         }
 
+        private string BuildName(string[] parts)
+        {
+            if (parts.Length == 1) return parts[0];
+            var reversed = parts.Reverse();
+            if (reversed.First() == "template" || reversed.ElementAt(0) == reversed.ElementAt(1))
+            {
+                reversed = reversed.Skip(1);
+            }
+            return String.Join("/", reversed.Reverse());
+        }
+
         public void ProcessRequest(HttpContext context)
         {
             var builder = new StringBuilder();
@@ -37,7 +48,7 @@
                 using (var reader = File.OpenText(file))
                 {
                     var path = rootPath.MakeRelativeUri(new Uri(file)).ToString();
-                    var name = Path.ChangeExtension(path, null).Replace(Path.DirectorySeparatorChar, '/');
+                    var name = BuildName(Path.ChangeExtension(path, null).Split('/'));
                     var template = reader.ReadToEnd().Replace("\r\n", "").Replace("\n", "").Replace("\"", "\\\"");
                     builder.AppendLine(String.Format(templateFormat, name, template));
                 }
@@ -45,7 +56,7 @@
 
             var componentPath = context.Server.MapPath("~/Client/components/");
             var componentFiles = Directory.EnumerateFiles(componentPath, "*.html", System.IO.SearchOption.AllDirectories);
-            foreach (var file in files)
+            foreach (var file in componentFiles)
             {
                 using (var reader = File.OpenText(file))
                 {
