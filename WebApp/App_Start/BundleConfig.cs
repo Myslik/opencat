@@ -7,6 +7,12 @@
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/ember").Include(
+                "~/Scripts/json2.js",
+                "~/Scripts/jquery-1.9.1.js",
+                "~/Scripts/underscore.js",
+                "~/Scripts/bootstrap.js",
+                "~/Scripts/handlebars.js",
+                "~/Scripts/moment.js",
                 "~/Scripts/ember.js", 
                 "~/Scripts/ember-data.js", 
                 "~/Scripts/fileuploader.js", 

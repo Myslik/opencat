@@ -250,9 +250,7 @@
     <Content Include="Client\routes\index\template.html" />
     <Content Include="Content\attachments.css" />
     <Content Include="Content\bootstrap-responsive.css" />
-    <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\editor.css" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
@@ -260,6 +258,10 @@
     <Content Include="Images\book.png" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="LICENSE.txt" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\ember.js" />
+    <Content Include="Scripts\handlebars.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\moment.js" />
@@ -271,9 +273,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\upload.png" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\ember.js" />
     <Content Include="Scripts\ember-data.js" />
     <Content Include="Scripts\fileuploader.js" />
     <Content Include="Scripts\json2.js" />

@@ -1,5 +1,5 @@
-// Version: v1.0.0-rc.1-268-ge0d5a9c
-// Last commit: e0d5a9c (2013-03-28 15:14:16 -0700)
+// Version: v1.0.0-rc.2
+// Last commit: 656fa6e (2013-03-29 13:40:38 -0700)
 
 
 (function() {
@@ -151,8 +151,8 @@ Ember.deprecateFunc = function(message, func) {
 
 })();
 
-// Version: v1.0.0-rc.1-268-ge0d5a9c
-// Last commit: e0d5a9c (2013-03-28 15:14:16 -0700)
+// Version: v1.0.0-rc.2
+// Last commit: 656fa6e (2013-03-29 13:40:38 -0700)
 
 
 (function() {
@@ -212,7 +212,7 @@ var define, requireModule;
 
   @class Ember
   @static
-  @version 1.0.0-rc.1
+  @version 1.0.0-rc.2
 */
 
 if ('undefined' === typeof Ember) {
@@ -239,10 +239,10 @@ Ember.toString = function() { return "Ember"; };
 /**
   @property VERSION
   @type String
-  @default '1.0.0-rc.1'
+  @default '1.0.0-rc.2'
   @final
 */
-Ember.VERSION = '1.0.0-rc.1';
+Ember.VERSION = '1.0.0-rc.2';
 
 /**
   Standard environmental variables. You can define these in a global `ENV`
@@ -21659,7 +21659,7 @@ Ember.Select = Ember.View.extend(
 
   tagName: 'select',
   classNames: ['ember-select'],
-  defaultTemplate: Ember.Handlebars.template(function anonymous(Handlebars, depth0, helpers, partials, data) {
+  defaultTemplate: Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
   var buffer = '', stack1, hashTypes, escapeExpression=this.escapeExpression, self=this;
@@ -25914,8 +25914,6 @@ var Application = Ember.Application = Ember.Namespace.extend(Ember.DeferredMixin
   */
   customEvents: null,
 
-  isInitialized: false,
-
   // Start off the number of deferrals at 1. This will be
   // decremented by the Application's own `initialize` method.
   _readinessDeferrals: 1,
@@ -26117,7 +26115,6 @@ var Application = Ember.Application = Ember.Namespace.extend(Ember.DeferredMixin
    **/
   initialize: function(){
     Ember.deprecate('Calling initialize manually is not supported. Please see Ember.Application#advanceReadiness and Ember.Application#deferReadiness');
-    this._initialize();
   },
   /**
     @private
@@ -26132,9 +26129,6 @@ var Application = Ember.Application = Ember.Namespace.extend(Ember.DeferredMixin
   */
   _initialize: function() {
     if (this.isDestroyed) { return; }
-    Ember.assert("Application initialize may only be called once. Note: calling initialize in application code is no longer required.", !this.isInitialized);
-
-    this.isInitialized = true;
 
     // At this point, the App.Router must already be assigned
     this.register('router:main', this.Router);
@@ -26153,8 +26147,6 @@ var Application = Ember.Application = Ember.Namespace.extend(Ember.DeferredMixin
   reset: function() {
     get(this, '__container__').destroy();
     this.buildContainer();
-
-    this.isInitialized = false;
 
     Ember.run.schedule('actions', this, function(){
       this._initialize();
@@ -27749,8 +27741,8 @@ Ember States
 
 
 })();
-// Version: v1.0.0-rc.1-268-ge0d5a9c
-// Last commit: e0d5a9c (2013-03-28 15:14:16 -0700)
+// Version: v1.0.0-rc.2
+// Last commit: 656fa6e (2013-03-29 13:40:38 -0700)
 
 
 (function() {
