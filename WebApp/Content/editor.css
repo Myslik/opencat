@@ -9,6 +9,10 @@
     border: 1px solid #eee;
 }
 
+.editor .message {
+    margin-left: 10px;
+}
+
 .editor input,
 .editor textarea {
     margin-bottom: 0;
@@ -41,7 +45,7 @@
             box-shadow: none;
 }
 
-.editor-controls {
-    margin-top: 6px;
-    display: none;
+.editor-help {
+    font-size: 12px;
+    font-weight: normal;
 }

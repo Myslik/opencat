@@ -1,7 +1,6 @@
 ﻿<div class="row-fluid">
-    {{view Ember.TextArea class="focusable span12" valueBinding="view.parentView.editing" style="width: 100%;"}}
+    {{view Ember.TextArea class="focusable span12" valueBinding="view.parentView.editing"}}
 </div>
-<div class="editor-controls">
-    <a href="#" class="btn btn-success" {{action save target="view.parentView"}}>Save</a>
-    <a href="#" class="btn" {{action close target="view.parentView"}}><i class="icon-remove"></i></a>
+<div class="row-fluid">
+    <div class="span12 text-info editor-help">Note: <strong>Enter</strong> to save. <strong>Esc</strong> to close.</div>
 </div>

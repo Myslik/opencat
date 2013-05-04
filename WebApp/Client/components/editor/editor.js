@@ -3,15 +3,15 @@
     "use strict";
 
     var openedEditor = null;
-
-    $('html').on('click.editor', function (event) {
-        if (openedEditor != null) {
+    var toggleEditor = function (editor) {
+        if (!Ember.isNone(openedEditor)) {
             openedEditor.close();
         }
-    });
+        openedEditor = editor || null;
+    };
 
-    Ember.TextArea.reopen({
-        attributeBindings: ['rows', 'cols', 'style']
+    $('html').on('click.editor', function (event) {
+        toggleEditor();
     });
 
     var ShowView = function (template, classNames) {
@@ -52,15 +52,17 @@
 
     App.TextEditor = Ember.ContainerView.extend({
         classNames: ['editor'],
-        childViews: ['showView'],
+        childViews: [],
 
-        showView: function () {
-            return this.get('value')
-                ? ShowView('{{view.parentView.value}}')
-                : ShowView('Click here to edit...', ['muted']);
-        }.property('value'),
-
+        showView: ShowView('{{view.parentView.value}} {{#if view.parentView.unsaved}}<span class="message text-warning">You have unsaved changes.</span>{{/if}}'),
+        emptyView: ShowView('{{#if view.parentView.unsaved}}<span class="text-warning">You have unsaved changes.</span>{{else}}<span class="muted">Click here to edit...</span>{{/if}}'),
         editView: EditView('components/editor'),
+
+        init: function () {
+            this._super();
+            this.changeTo(Ember.isEmpty(this.get('value')) ? 'emptyView' : 'showView');
+            this.set('editing', this.get('value'));
+        },
 
         changeTo: function(state) {
             this.removeAllChildren();
@@ -69,14 +71,17 @@
             return view;
         },
 
-        edit: function () {
-            this.set('editing', this.get('value'));
-            this.changeTo('editView').focus();
+        unsaved: function () {
+            return this.get('value') != this.get('editing');
+        }.property('value', 'editing'),
 
-            if (openedEditor) {
-                openedEditor.close();
-            }
-            openedEditor = this;
+        didValueChange: function () {
+            this.set('editing', this.get('value'));
+        }.observes('value'),
+
+        edit: function () {
+            this.changeTo('editView').focus();
+            toggleEditor(this);
         },
 
         save: function () {
@@ -87,7 +92,7 @@
         },
         
         close: function () {
-            this.changeTo('showView');
+            this.changeTo(Ember.isEmpty(this.get('value')) ? 'emptyView' : 'showView');
             openedEditor = null;
         }
     });
