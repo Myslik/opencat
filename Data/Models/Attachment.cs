@@ -17,7 +17,7 @@
         {
             var attachment = new Attachment
             {
-                id = info.Id.AsObjectId,
+                id = info.Id.ToString(),
                 name = info.Name,
                 size = info.Length,
                 md5 = info.MD5,
@@ -26,7 +26,7 @@
             };
             if (info.Metadata.Contains("job_id"))
             {
-                attachment.job_id = info.Metadata["job_id"].AsObjectId.ToString();
+                attachment.job_id = info.Metadata["job_id"].ToString();
             }
             return attachment;
         }

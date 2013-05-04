@@ -8,13 +8,12 @@
         {
             bundles.Add(new ScriptBundle("~/bundles/ember").Include(
                 "~/Scripts/json2.js",
-                "~/Scripts/jquery-1.9.1.js",
-                "~/Scripts/underscore.js",
+                "~/Scripts/jquery-2.0.0.js",
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/handlebars.js",
                 "~/Scripts/moment.js",
-                "~/Scripts/ember.js", 
-                "~/Scripts/ember-data.js", 
+                "~/Scripts/ember-latest.js", 
+                "~/Scripts/ember-data-latest.js", 
                 "~/Scripts/fileuploader.js", 
                 "~/Scripts/select2.js"));
             bundles.Add(new ScriptBundle("~/bundles/application").IncludeDirectory("~/Client/", "*.js", true));

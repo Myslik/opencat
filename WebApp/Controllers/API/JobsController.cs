@@ -5,6 +5,7 @@
     using System.Net;
     using System.Net.Http;
     using System.Web.Http;
+    using System.Collections.Generic;
 
     public class JobsController : ApiController
     {
@@ -15,34 +16,33 @@
             Repository = new Repository<Job>();
         }
 
-        public DTO Get()
+        public IEnumerable<Job> Get()
         {
-            return new DTO { jobs = Repository.Get() };
+            return Repository.Get();
         }
 
-        public DTO Get(string id)
+        public Job Get(string id)
         {
             var job = Repository.Get(id);
             if (job == null) throw new HttpResponseException(HttpStatusCode.NotFound);
-            return new DTO { job = job };
+            return job;
         }
 
-        public DTO Post(DTO dto)
+        public Job Post(Job job)
         {
-            Repository.Create(dto.job);
-            return dto;
+            return Repository.Create(job);
         }
 
-        public DTO Put(string id, DTO dto)
+        public void Put(string id, Job job)
         {
-            var ok = Repository.Edit(id, dto.job);
+            var ok = Repository.Edit(id, job);
             if (!ok) throw new HttpResponseException(HttpStatusCode.BadRequest);
-            return dto;
         }
 
         public void Delete(string id)
         {
-            Repository.Delete(id);
+            var ok = Repository.Delete(id);
+            if (!ok) throw new HttpResponseException(HttpStatusCode.BadRequest);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿namespace OpenCat.Models
 {
-    using MongoDB.Bson;
     using System;
     using System.Collections.Generic;
 
@@ -9,6 +8,6 @@
         public string name { get; set; }
         public string description { get; set; }
         public int words { get; set; }
-        public IList<ObjectId> attachment_ids { get; set; }
+        public List<string> attachment_ids { get; set; }
     }
 }

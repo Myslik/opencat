@@ -1,7 +1,7 @@
 ﻿window.App = Ember.Application.create();
 
 App.ready = function () {
-    App.user = App.User.create();
+    window.User = App.user = App.User.create();
 
     App.Language.find();
     App.Job.find();

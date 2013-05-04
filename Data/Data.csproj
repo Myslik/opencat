@@ -49,11 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\DataContext.cs" />
-    <Compile Include="Data\Generator.cs" />
+    <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\Repository.cs" />
     <Compile Include="Models\Attachment.cs" />
-    <Compile Include="Models\DTO.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\Language.cs" />

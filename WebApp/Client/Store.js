@@ -1,8 +1,10 @@
-﻿App.reopen({
+﻿App.Adapter = DS.RESTAdapter.extend({
+    namespace: 'api'
+});
+
+App.reopen({
     Store: DS.Store.extend({
         revision: 12,
-        adapter: DS.RESTAdapter.create({
-            namespace: 'api'
-        })
+        adapter: App.Adapter.create()
     })
 });

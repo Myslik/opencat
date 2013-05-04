@@ -7,6 +7,7 @@
     using System.IO;
     using System.Web.Mvc;
     using System.Web.Security;
+    using MongoDB.Driver;
 
     public class HomeController : Controller
     {
@@ -25,8 +26,9 @@
 
         public ActionResult Drop()
         {
-            var context = new DataContext();
-            context.Database.Drop();
+            var server = new MongoClient().GetServer();
+            var database = server.GetDatabase("OpenCAT");
+            database.Drop();
             return RedirectToAction("Index");
         }
     }

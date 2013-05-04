@@ -209,10 +209,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\API\LanguagesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Converters\MongoConverter.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\UploadedFile.cs" />
     <Compile Include="Extensions\UserExtensions.cs" />
+    <Compile Include="Formatters\EmberJsonMediaTypeFormatter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -256,14 +256,15 @@
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\select2.css" />
     <Content Include="Images\book.png" />
-    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="LICENSE.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\ember.js" />
+    <Content Include="Scripts\ember-data-latest.js" />
+    <Content Include="Scripts\ember-latest.js" />
     <Content Include="Scripts\handlebars.js" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <None Include="Scripts\jquery-2.0.0.intellisense.js" />
+    <Content Include="Scripts\jquery-2.0.0.js" />
+    <Content Include="Scripts\jquery-2.0.0.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\select2.js" />
     <Content Include="Scripts\select2.min.js" />
@@ -273,13 +274,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\upload.png" />
-    <Content Include="Scripts\ember-data.js" />
     <Content Include="Scripts\fileuploader.js" />
     <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\json2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\underscore.js" />
-    <Content Include="Scripts\underscore.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -294,8 +292,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Shared\Login.cshtml" />
+    <Content Include="Scripts\jquery-2.0.0.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

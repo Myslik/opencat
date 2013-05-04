@@ -6,7 +6,6 @@ App.Job = DS.Model.extend({
     name: attr('string'),
     description: attr('string'),
     words: attr('number'),
-    attachments: attr('array'),
 
     // Relationships
     attachments: DS.hasMany('App.Attachment')

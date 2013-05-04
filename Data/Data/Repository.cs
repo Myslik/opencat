@@ -5,85 +5,74 @@
     using MongoDB.Driver.Builders;
     using OpenCat.Models;
     using System;
-    using System.Collections.Generic;
     using System.Linq;
+    using System.Collections.Generic;
 
-    public class Repository<T> where T : Entity
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
-        public DataContext Context { get; set; }
-        private MongoCollection<T> collection;
-        public MongoCollection<T> Collection
-        {
-            get
-            {
-                if (collection == null)
-                {
-                    if (!Context.Database.CollectionExists(typeof(T).Name))
-                    {
-                        Context.Database.CreateCollection(typeof(T).Name);
-                    }
-                    collection = Context.Database.GetCollection<T>(typeof(T).Name);
-                }
-                return collection;
-            }
-        }
+        protected MongoServer Server { get; set; }
+        public MongoDatabase Database { get; set; }
+        public MongoCollection<TEntity> Collection { get; set; }
 
         public Repository()
         {
-            Context = new DataContext();
+            Server = new MongoClient().GetServer();
+            Database = Server.GetDatabase("OpenCAT");
+            Collection = Database.GetCollection<TEntity>(typeof(TEntity).Name);
         }
 
-        public Repository(DataContext context)
+        public virtual IQueryable<TEntity> Get()
         {
-            Context = context;
+            return Collection.FindAll().AsQueryable();
         }
 
-        public T Get(ObjectId id)
+        public virtual TEntity Get(string id)
         {
-            return Collection.FindOneById(id);
+            IMongoQuery query = Query.EQ("_id", id);
+            return Collection.Find(query).FirstOrDefault();
         }
 
-        public T Get(string id)
+        public virtual TEntity Create(TEntity entity)
         {
-            return Get(ObjectId.Parse(id));
-        }
-
-        public IQueryable<T> Get()
-        {
-            var result = Collection.FindAll().AsQueryable();
-
-            return result;
-        }
-
-        public void Create(T entity)
-        {
+            entity.id = ObjectId.GenerateNewId().ToString();
             entity.created_at = DateTime.UtcNow;
+            entity.updated_at = DateTime.UtcNow;
             Collection.Insert(entity);
+            return entity;
         }
 
-        public bool Edit(ObjectId id, T entity)
+        public virtual bool Edit(string id, TEntity entity)
         {
-            entity.id = id;
-            var query = Query.EQ("_id", id);
-            var update = Update.Replace<T>(entity);
-            var concern = Collection.Update(query, update);
-            return concern.DocumentsAffected > 0;
+            IMongoQuery query = Query.EQ("_id", id);
+            
+            IMongoUpdate update;
+            if (entity.fields == null)
+            {
+                entity.id = id;
+                entity.updated_at = DateTime.UtcNow;
+                update = Update.Replace<TEntity>(entity);
+            }
+            else
+            {
+                var updates = new List<IMongoUpdate>();
+                var document = entity.ToBsonDocument();
+                foreach (var field in entity.fields)
+                {                    
+                    updates.Add(Update.Set(field, document[field]));
+                }
+                updates.Add(Update.Set("updated_at", DateTime.UtcNow));
+                update = Update.Combine(updates);
+            }
+
+            WriteConcernResult result = Collection.Update(query, update);
+            return result.UpdatedExisting;
         }
 
-        public bool Edit(string id, T entity)
+        public virtual bool Delete(string id)
         {
-            return Edit(ObjectId.Parse(id), entity);
-        }
-
-        public void Delete(ObjectId id)
-        {
-            var query = Query.EQ("_id", id);
-            Collection.Remove(query);
-        }
-
-        public void Delete(string id)
-        {
-            Delete(ObjectId.Parse(id));
+            IMongoQuery query = Query.EQ("_id", id);
+            WriteConcernResult result = Collection.Remove(query);
+            return result.DocumentsAffected == 1;
         }
     }
 }

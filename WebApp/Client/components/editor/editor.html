@@ -1,5 +1,7 @@
-﻿{{view Ember.TextField valueBinding="view.value"}}
+﻿<div class="row-fluid">
+    {{view Ember.TextField class="focusable span12" valueBinding="view.parentView.editing"}}
+</div>
 <div class="editor-controls">
-    <a href="#" class="btn btn-success" {{action save view.value target="view.parentView"}}>Save</a>
+    <a href="#" class="btn btn-success" {{action save target="view.parentView"}}>Save</a>
     <a href="#" class="btn" {{action close target="view.parentView"}}><i class="icon-remove"></i></a>
 </div>
