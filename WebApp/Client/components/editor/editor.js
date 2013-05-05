@@ -2,18 +2,6 @@
 
     "use strict";
 
-    var openedEditor = null;
-    var toggleEditor = function (editor) {
-        if (!Ember.isNone(openedEditor)) {
-            openedEditor.close();
-        }
-        openedEditor = editor || null;
-    };
-
-    $('html').on('click.editor', function (event) {
-        toggleEditor();
-    });
-
     var ShowView = function (template, classNames) {
         classNames = classNames || [];
         classNames.push('editor-show');
@@ -61,7 +49,9 @@
         init: function () {
             this._super();
             this.changeTo(Ember.isEmpty(this.get('value')) ? 'emptyView' : 'showView');
-            this.set('editing', this.get('value'));
+            this.didValueChange();
+
+            this.on('focusOut', this.close);
         },
 
         changeTo: function(state) {
@@ -81,7 +71,6 @@
 
         edit: function () {
             this.changeTo('editView').focus();
-            toggleEditor(this);
         },
 
         save: function () {
@@ -93,7 +82,6 @@
         
         close: function () {
             this.changeTo(Ember.isEmpty(this.get('value')) ? 'emptyView' : 'showView');
-            openedEditor = null;
         }
     });
 
