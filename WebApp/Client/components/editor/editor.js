@@ -50,12 +50,10 @@
             this._super();
             this.changeTo(Ember.isEmpty(this.get('value')) ? 'emptyView' : 'showView');
             this.didValueChange();
-
-            this.on('focusOut', this.close);
         },
 
-        changeTo: function(state) {
-            this.removeAllChildren();
+        changeTo: function (state) {
+            this.clear();
             var view = this.createChildView(this.get(state));
             this.pushObject(view);
             return view;
@@ -71,12 +69,14 @@
 
         edit: function () {
             this.changeTo('editView').focus();
+            this.on('focusOut', this.close);
         },
 
         save: function () {
             if (this.get('value') != this.get('editing')) {
                 this.set('value', this.get('editing'));
             }
+            this.off('focusOut', this.close);
             this.close();
         },
         

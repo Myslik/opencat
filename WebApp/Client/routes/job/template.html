@@ -3,7 +3,9 @@
     {{view App.TextEditor valueBinding="content.name"}}
 </div>
 <hr class="clearfix" style="margin: 10px 0;" />
+
 {{view App.TextAreaEditor valueBinding="content.description"}}
+
 <div class="table-attachments" style="margin-top: 40px;">
     <div style="padding: 8px; background-color: #fafafa;">Attachments {{view App.UploaderToJob jobBinding="content" classNames="btn btn-mini btn-success pull-right"}}</div>
     {{render 'attachments' attachments}}

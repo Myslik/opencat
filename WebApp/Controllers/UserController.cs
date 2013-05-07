@@ -6,6 +6,7 @@
     using DotNetOpenAuth.OpenId.RelyingParty;
     using OpenCat.Data;
     using OpenCat.Models;
+    using System;
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.Security;
@@ -75,12 +76,23 @@
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Login(string loginIdentifier)
+        public ActionResult Login(string loginIdentifier, string email, string password)
         {
-            if (!Identifier.IsValid(loginIdentifier))
+            if (String.IsNullOrEmpty(loginIdentifier))
             {
-                ModelState.AddModelError("loginIdentifier",
-                            "The specified login identifier is invalid");
+                if (email == "user@gmail.com" && password == "correct")
+                {
+                    FormsAuthentication.RedirectFromLoginPage("user@gmail.com", false);
+                }
+                else
+                {
+                    ViewData["Message"] = "Authentication failed";                    
+                }
+                return View();
+            }
+            else if (!Identifier.IsValid(loginIdentifier))
+            {
+                ViewData["Message"] = "The specified login identifier is invalid"; 
                 return View();
             }
             else

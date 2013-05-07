@@ -10,7 +10,7 @@
     {
         public IEnumerable<Language> Get()
         {
-            return CultureInfo.GetCultures(CultureTypes.AllCultures)
+            return CultureInfo.GetCultures(CultureTypes.AllCultures).Take(40)
                     .OrderBy(culture => culture.DisplayName)
                     .Select(culture => new Language { id = culture.IetfLanguageTag, name = culture.DisplayName });
         }
