@@ -14,7 +14,7 @@ namespace WebApp.Specs
         [AfterScenario]
         public static void AfterWebScenario()
         {
-            WebController.Instance.Stop();
+            WebController.Instance.Selenium.Manage().Cookies.DeleteAllCookies();
         }
 
         [AfterTestRun]

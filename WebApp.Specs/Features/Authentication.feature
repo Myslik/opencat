@@ -7,3 +7,8 @@ Scenario: Valid Login
 Scenario: Invalid Login	
 	When I authenticate with invalid credentials
 	Then I should see invalid credentials message
+
+Scenario: Logout
+	When I authenticate with valid credentials
+	 And I log out
+	Then I should see the login form

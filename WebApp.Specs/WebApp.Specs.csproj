@@ -71,6 +71,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Basic.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\Navigation.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Navigation.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Steps\NavigationSteps.cs" />
     <Compile Include="SetUp.cs" />
     <Compile Include="Steps\AuthenticationSteps.cs" />
     <Compile Include="Steps\BasicSteps.cs" />
@@ -88,6 +94,10 @@
     <None Include="Features\Basic.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Basic.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Navigation.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Navigation.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

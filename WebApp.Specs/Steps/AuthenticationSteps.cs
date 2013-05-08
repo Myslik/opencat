@@ -3,12 +3,12 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 
-namespace WebApp.Specs.Steps
+namespace WebApp.Specs
 {
     [Binding]
     public class AuthenticationSteps : WebStepsBase
     {
-        [When(@"I authenticate with valid credentials")]
+        [StepDefinition(@"I authenticate with valid credentials")]
         public void WhenIAuthenticateWithValidCredentials()
         {
             WebDriver.Navigate().GoToUrl(Site);
@@ -36,6 +36,12 @@ namespace WebApp.Specs.Steps
         public void ThenIShouldSeeInvalidCredentialsMessage()
         {
             Assert.AreEqual("Authentication failed", WebDriver.FindElement(By.ClassName("alert-error")).Text);
+        }
+
+        [When(@"I log out")]
+        public void WhenILogOut()
+        {
+            WebDriver.FindElement(By.LinkText("Logout")).Click();
         }
     }
 }
