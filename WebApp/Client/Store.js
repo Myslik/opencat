@@ -1,16 +1,16 @@
 ﻿App.Serializer = DS.RESTSerializer.extend({
 
-    referenceType: function (type, name) {
+    includeType: function (type, name) {
         return this.mappingOption(type, name, 'reference');
     },
 
     addHasMany: function (hash, record, key, relationship) {
         var type = record.constructor,
             name = relationship.key,
-            manyArray, referenceType;
+            manyArray, includeType;
 
-        referenceType = this.referenceType(type, name);
-        if (referenceType !== 'ids') {
+        includeType = this.includeType(type, name);
+        if (includeType !== 'ids') {
             return this._super(hash, record, key, relationship);
         }
 
@@ -21,12 +21,28 @@
 });
 
 App.Adapter = DS.RESTAdapter.extend({
+
     namespace: 'api',
-    serializer: App.Serializer.create()
+    serializer: App.Serializer.create(),
+
+    dirtyRecordsForHasManyChange: function (dirtySet, record, relationship) {
+        var includeType = Ember.get(this, 'serializer').includeType(record.constructor, relationship.secondRecordName);
+        if (includeType === 'ids') {
+            dirtySet.add(record);
+        }
+
+        this._super(dirtySet, record, relationship);
+    }
+
 });
 
 App.Adapter.map('App.Job', {
-    attachments: { reference: 'ids' }
+    attachments: { include: 'ids' }
+});
+
+DS.Model.reopen({
+    createdAt: DS.attr('date'),
+    updatedAt: DS.attr('date')
 });
 
 App.reopen({

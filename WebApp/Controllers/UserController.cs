@@ -14,31 +14,30 @@
     public class UserController : Controller
     {
         private static OpenIdRelyingParty openid = new OpenIdRelyingParty();
-        private Repository<User> Repository { get; set; }
+        private UserRepository Repository { get; set; }
 
         public UserController()
         {
-            Repository = new Repository<User>();
+            Repository = new UserRepository();
         }
 
-        private void EnsureUserExists(IAuthenticationResponse response)
+        private User EnsureUserExists(IAuthenticationResponse response)
         {
-            if (!Repository.Get().Any(u => u.identifier == response.ClaimedIdentifier.ToString()))
+            var user = Repository.Get().SingleOrDefault(u => u.identifier == response.ClaimedIdentifier.ToString());
+            if (user == null)
             {
                 var claim = response.GetExtension<ClaimsResponse>();
 
-                var user = new User
+                user = new User
                 {
                     identifier = response.ClaimedIdentifier.ToString(),
                     name = claim.FullName,
                     email = claim.Email
                 };
 
-                user.GeneratePassword();
-                user.ComputeGravatar();
-
-                Repository.Create(user);
+                return Repository.Create(user);
             }
+            return user;
         }
 
         public ActionResult Logout()
@@ -57,9 +56,9 @@
                 switch (response.Status)
                 {
                     case AuthenticationStatus.Authenticated:
-                        EnsureUserExists(response);
+                        var user = EnsureUserExists(response);
                         FormsAuthentication.RedirectFromLoginPage(
-                            response.ClaimedIdentifier, false);
+                            user.email, false);
                         break;
                     case AuthenticationStatus.Canceled:
                         ModelState.AddModelError("loginIdentifier",
@@ -80,9 +79,9 @@
         {
             if (String.IsNullOrEmpty(loginIdentifier))
             {
-                if (email == "user@gmail.com" && password == "correct")
+                if (Repository.Verify(email, password))
                 {
-                    FormsAuthentication.RedirectFromLoginPage("user@gmail.com", false);
+                    FormsAuthentication.RedirectFromLoginPage(email, false);
                 }
                 else
                 {

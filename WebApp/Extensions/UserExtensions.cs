@@ -26,9 +26,9 @@
             user.password = BCrypt.Net.BCrypt.HashPassword(password);
         }
 
-        public static void VerifyPassword(this User user, string password)
+        public static bool VerifyPassword(this User user, string password)
         {
-            BCrypt.Net.BCrypt.Verify(password, user.password);
+            return BCrypt.Net.BCrypt.Verify(password, user.password);
         }
 
         public static void ComputeGravatar(this User user)

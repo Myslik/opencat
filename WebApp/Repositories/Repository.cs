@@ -7,6 +7,7 @@
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Configuration;
 
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
@@ -17,7 +18,8 @@
         public Repository()
         {
             Server = new MongoClient().GetServer();
-            Database = Server.GetDatabase("OpenCAT");
+            var dbName = ConfigurationManager.AppSettings["dbName"];
+            Database = Server.GetDatabase(dbName);
             Collection = Database.GetCollection<TEntity>(typeof(TEntity).Name);
         }
 
@@ -54,10 +56,14 @@
             }
             else
             {
+                var ignored = new string[] { "_id", "id", "created_at", "updated_at" };
+
                 var updates = new List<IMongoUpdate>();
                 var document = entity.ToBsonDocument();
                 foreach (var field in entity.fields)
-                {                    
+                {
+                    if (ignored.Contains(field)) continue;
+
                     updates.Add(Update.Set(field, document[field]));
                 }
                 updates.Add(Update.Set("updated_at", DateTime.UtcNow));

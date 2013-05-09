@@ -2,7 +2,6 @@
 
 App.Job = DS.Model.extend({
     // Attributes
-    createdAt: attr('date'),
     name: attr('string'),
     description: attr('string'),
     words: attr('number'),

@@ -8,28 +8,32 @@
     using System.Web.Mvc;
     using System.Web.Security;
     using MongoDB.Driver;
+    using System.Configuration;
 
     public class HomeController : Controller
     {
-        private Repository<User> Repository { get; set; }
+        private UserRepository Repository { get; set; }
 
         public HomeController()
         {
-            Repository = new Repository<User>();
+            Repository = new UserRepository();
         }
 
         public ActionResult Index()
         {
-            var user = Repository.Get().Where(u => u.identifier == User.Identity.Name).FirstOrDefault();
+            var user = Repository.Get().Where(u => u.email == User.Identity.Name).FirstOrDefault();
             return View(user);
         }
 
         public ActionResult Drop()
         {
+            FormsAuthentication.SignOut();
+            var dbName = ConfigurationManager.AppSettings["dbName"];
             var server = new MongoClient().GetServer();
-            var database = server.GetDatabase("OpenCAT");
+            var database = server.GetDatabase(dbName);
             database.Drop();
-            return RedirectToAction("Index");
+            DataConfig.Initialize();
+            return Redirect("/");
         }
     }
 }
