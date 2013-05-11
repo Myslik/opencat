@@ -12,11 +12,11 @@
 
     public class AttachmentsController : Controller
     {
-        private Repository<Job> Jobs { get; set; }
+        private JobRepository Jobs { get; set; }
 
         public AttachmentsController()
         {
-            Jobs = new Repository<Job>();
+            Jobs = new JobRepository();
         }
 
         [NonAction]

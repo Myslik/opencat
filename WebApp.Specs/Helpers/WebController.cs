@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using OpenQA.Selenium;
 using OpenQA.Selenium.PhantomJS;
+using OpenQA.Selenium.Remote;
 
 namespace WebApp.Specs
 {

@@ -2,7 +2,9 @@
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
+using MongoDB.Driver;
 using NUnit.Framework;
+using OpenCat;
 
 namespace WebApp.Specs
 {

@@ -65,15 +65,34 @@ namespace WebApp.Specs.Features
         }
         
         [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Visit Login page")]
+        [NUnit.Framework.CategoryAttribute("web")]
+        public virtual void VisitLoginPage()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Visit Login page", new string[] {
+                        "web"});
+#line 4
+this.ScenarioSetup(scenarioInfo);
+#line 5
+ testRunner.Given("I open the landing page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 6
+ testRunner.Then("I should see the login form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Valid Login")]
+        [NUnit.Framework.CategoryAttribute("web")]
         public virtual void ValidLogin()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Valid Login", ((string[])(null)));
-#line 3
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Valid Login", new string[] {
+                        "web"});
+#line 9
 this.ScenarioSetup(scenarioInfo);
-#line 4
+#line 10
  testRunner.When("I authenticate with valid credentials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 5
+#line 11
  testRunner.Then("I should be redirected to application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -81,14 +100,16 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Invalid Login")]
+        [NUnit.Framework.CategoryAttribute("web")]
         public virtual void InvalidLogin()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invalid Login", ((string[])(null)));
-#line 7
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invalid Login", new string[] {
+                        "web"});
+#line 14
 this.ScenarioSetup(scenarioInfo);
-#line 8
+#line 15
  testRunner.When("I authenticate with invalid credentials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 9
+#line 16
  testRunner.Then("I should see invalid credentials message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -96,16 +117,18 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Logout")]
+        [NUnit.Framework.CategoryAttribute("web")]
         public virtual void Logout()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logout", ((string[])(null)));
-#line 11
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logout", new string[] {
+                        "web"});
+#line 19
 this.ScenarioSetup(scenarioInfo);
-#line 12
+#line 20
  testRunner.When("I authenticate with valid credentials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 13
+#line 21
   testRunner.And("I log out", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 14
+#line 22
  testRunner.Then("I should see the login form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

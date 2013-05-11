@@ -1,12 +1,12 @@
 ﻿<img alt="job" src="/Images/book.png" style="float: left; margin-right: 10px;" />
 <div style="margin-left: 42px; font-size:large; font-weight: bold;">
-    {{view App.TextEditor valueBinding="content.name"}}
+    {{view App.TextEditor id="name" valueBinding="content.name"}}
 </div>
 <hr class="clearfix" style="margin: 10px 0;" />
 
-{{view App.TextAreaEditor valueBinding="content.description"}}
+{{view App.TextAreaEditor id="description" valueBinding="content.description"}}
 
 <div class="table-attachments" style="margin-top: 40px;">
-    <div style="padding: 8px; background-color: #fafafa;">Attachments {{view App.UploaderToJob jobBinding="content" classNames="btn btn-mini btn-success pull-right"}}</div>
+    <div style="padding: 8px; background-color: #fafafa;">Attachments {{view App.UploaderToJob id="job-upload" jobBinding="content" classNames="btn btn-mini btn-success pull-right"}}</div>
     {{render 'attachments' attachments}}
 </div>

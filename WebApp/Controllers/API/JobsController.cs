@@ -1,19 +1,20 @@
 ﻿namespace OpenCat.ApiControllers
 {
-    using OpenCat.Data;
-    using OpenCat.Models;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Net;
     using System.Net.Http;
     using System.Web.Http;
-    using System.Collections.Generic;
+    using OpenCat.Data;
+    using OpenCat.Models;
 
     public class JobsController : ApiController
     {
-        public Repository<Job> Repository { get; set; }
+        public JobRepository Repository { get; set; }
 
         public JobsController()
         {
-            Repository = new Repository<Job>();
+            Repository = new JobRepository();
         }
 
         public IEnumerable<Job> Get()

@@ -37,6 +37,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\packages\mongocsharpdriver.1.8.1\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\packages\mongocsharpdriver.1.8.1\lib\net35\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -67,20 +76,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Authentication.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Basic.feature.cs">
+    <Compile Include="Features\Jobs.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Basic.feature</DependentUpon>
+      <DependentUpon>Jobs.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\Navigation.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Navigation.feature</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\WebElementExtension.cs" />
+    <Compile Include="Pages\BasePage.cs" />
+    <Compile Include="Pages\EditJobPage.cs" />
+    <Compile Include="Pages\NewJobPage.cs" />
+    <Compile Include="Pages\JobsPage.cs" />
+    <Compile Include="Pages\LoginPage.cs" />
+    <Compile Include="Pages\MainPage.cs" />
+    <Compile Include="Steps\JobsSteps.cs" />
     <Compile Include="Steps\NavigationSteps.cs" />
     <Compile Include="SetUp.cs" />
     <Compile Include="Steps\AuthenticationSteps.cs" />
-    <Compile Include="Steps\BasicSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\WebController.cs" />
     <Compile Include="Helpers\WebStepsBase.cs" />
@@ -92,14 +108,15 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Authentication.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\Basic.feature">
+    <None Include="Features\Jobs.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Basic.feature.cs</LastGenOutput>
+      <LastGenOutput>Jobs.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Navigation.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Navigation.feature.cs</LastGenOutput>
     </None>
+    <None Include="Files\1.xlz" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +127,12 @@
     <Content Include="phantomjs-license.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebApp\WebApp.csproj">
+      <Project>{bc57d1e8-476f-4f3f-bdee-4cad437a95fc}</Project>
+      <Name>WebApp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
