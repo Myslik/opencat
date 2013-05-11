@@ -29,12 +29,7 @@
         {
             string[] parts = Path.ChangeExtension(file, null).Split('/');
             if (parts.Length == 1) return parts[0];
-            var reversed = parts.Reverse();
-            if (reversed.First() == "default" || reversed.ElementAt(0) == reversed.ElementAt(1))
-            {
-                reversed = reversed.Skip(1);
-            }
-            return String.Join("/", reversed.Reverse());
+            return String.Join("/", parts.NonConsecutive().Where(p => p != "default"));
         }
 
         private StringBuilder _builder = new StringBuilder();

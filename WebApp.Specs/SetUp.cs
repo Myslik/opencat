@@ -55,7 +55,10 @@ namespace WebApp.Specs
         [TearDown]
         public void RunAfterAnyTests()
         {
-            iisexpress.Kill();
+            if (!iisexpress.HasExited)
+            {
+                iisexpress.Kill();
+            }
         }
     }
 }
