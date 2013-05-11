@@ -25,8 +25,9 @@
             get { return false; }
         }
 
-        private string BuildName(string[] parts)
+        private string BuildName(string file)
         {
+            string[] parts = Path.ChangeExtension(file, null).Split('/');
             if (parts.Length == 1) return parts[0];
             var reversed = parts.Reverse();
             if (reversed.First() == "default" || reversed.ElementAt(0) == reversed.ElementAt(1))
@@ -36,48 +37,32 @@
             return String.Join("/", reversed.Reverse());
         }
 
+        private StringBuilder _builder = new StringBuilder();
+        private HttpContext _context;
+        private void Map(string path, Func<string, string> naming)
+        {
+            var absolute = new Uri(_context.Server.MapPath(path));
+            var files = Directory.EnumerateFiles(absolute.AbsolutePath, "*.html", SearchOption.AllDirectories);
+            var line = String.Join("\n", files.Select(f =>
+            {
+                var name = naming(absolute.MakeRelativeUri(new Uri(f)).ToString());
+                var template = File.OpenText(f).ReadToEnd().Replace("\r\n", "").Replace("\n", "").Replace("\"", "\\\"");
+                return String.Format(templateFormat, name, template);
+            }));
+            _builder.AppendLine(line);
+        }
+
         public void ProcessRequest(HttpContext context)
         {
-            var builder = new StringBuilder();
+            _context = context;
 
-            var fullPath = context.Server.MapPath("~/Client/routes/");
-            var rootPath = new Uri(fullPath);
-            var files = Directory.EnumerateFiles(fullPath, "*.html", System.IO.SearchOption.AllDirectories);
-            foreach (var file in files)
-            {
-                using (var reader = File.OpenText(file))
-                {
-                    var path = rootPath.MakeRelativeUri(new Uri(file)).ToString();
-                    var name = BuildName(Path.ChangeExtension(path, null).Split('/'));
-                    var template = reader.ReadToEnd().Replace("\r\n", "").Replace("\n", "").Replace("\"", "\\\"");
-                    builder.AppendLine(String.Format(templateFormat, name, template));
-                }
-            }
-
-            var componentPath = context.Server.MapPath("~/Client/components/");
-            var componentFiles = Directory.EnumerateFiles(componentPath, "*.html", System.IO.SearchOption.AllDirectories);
-            foreach (var file in componentFiles)
-            {
-                using (var reader = File.OpenText(file))
-                {
-                    var path = Path.GetFileNameWithoutExtension(file);
-                    var name = String.Format("components/{0}", path);
-                    var template = reader.ReadToEnd().Replace("\r\n", "").Replace("\n", "").Replace("\"", "\\\"");
-                    builder.AppendLine(String.Format(templateFormat, name, template));
-                }
-            }
+            Map("~/Client/routes/", BuildName);
+            Map("~/Client/components/", file => String.Format("components/{0}", Path.GetFileNameWithoutExtension(file)));
 
             var minifier = new Minifier();
             context.Response.ContentType = "text/javascript";
-            var content = minifier.MinifyJavaScript(builder.ToString());
-            if (minifier.ErrorList.Any())
-            {
-                context.Response.Write(builder.ToString());
-            }
-            else
-            {
-                context.Response.Write(content);
-            }
+            var content = minifier.MinifyJavaScript(_builder.ToString());
+            context.Response.Write(minifier.ErrorList.Any() ? _builder.ToString() : content);
             context.Response.End();
         }
     }
