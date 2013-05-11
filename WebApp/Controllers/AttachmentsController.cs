@@ -25,8 +25,7 @@
             var job = new Job
             {
                 name = DateTime.Now.Ticks.ToString(),
-                words = 0,
-                attachment_ids = new List<String>()
+                words = 0
             };
             Jobs.Create(job);
             return job;
@@ -41,7 +40,6 @@
                 Metadata = new BsonDocument(new BsonElement ("job_id", job.id))
             };
             var info = gfs.Upload(file.InputStream, file.FileName, options);
-            if (job.attachment_ids == null) job.attachment_ids = new List<String>();
             job.attachment_ids.Add(info.Id.ToString());
             return job;
         }
@@ -49,28 +47,22 @@
         [HttpPost]
         public ActionResult Upload()
         {
-            return this.UploadFiles(files =>
+            return this.UploadFiles(file =>
             {
                 var job = CreateJob();
-                foreach (var file in files)
-                {
-                    job = UploadFile(job, file);
-                }
-                Jobs.Edit(job.id, job);
+                job = UploadFile(job, file);
+                Jobs.Update(job.id, job);
             });
         }
 
         [HttpPost]
         public ActionResult UploadToJob(string id)
         {
-            return this.UploadFiles(files =>
+            return this.UploadFiles(file =>
             {
-                var job = Jobs.Get(id);
-                foreach (var file in files)
-                {
-                    job = UploadFile(job, file);
-                }
-                Jobs.Edit(job.id, job);
+                var job = Jobs.Read(id);
+                job = UploadFile(job, file);
+                Jobs.Update(job.id, job);
             });
         }
 

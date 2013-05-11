@@ -28,7 +28,7 @@ namespace OpenCat.Formatters
                 var serializer = JsonSerializer.Create(SerializerSettings);
 
                 Entity entity = data[prefix].ToObject(type, serializer) as Entity;
-                entity.fields = fields.ToArray();
+                entity.fields = fields.AsEnumerable();
                 return entity;
             });
         }

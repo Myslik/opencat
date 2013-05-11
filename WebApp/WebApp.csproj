@@ -31,6 +31,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>opencat.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -211,6 +213,7 @@
     <Compile Include="Controllers\API\LanguagesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\JobRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
@@ -275,6 +278,7 @@
     <Content Include="Scripts\ember-data-latest.js" />
     <Content Include="Scripts\ember-latest.js" />
     <Content Include="Scripts\handlebars.js" />
+    <Content Include="opencat.ruleset" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.0.js" />
     <Content Include="Scripts\jquery-2.0.0.min.js" />

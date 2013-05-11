@@ -14,7 +14,7 @@ namespace OpenCat
             // Users
             var users = new UserRepository();
 
-            if (!users.Get().Any(u => u.email == "user@gmail.com"))
+            if (!users.Read().Any(u => u.email == "user@gmail.com"))
             {
                 users.Create(new User
                 {
@@ -26,7 +26,7 @@ namespace OpenCat
             // Jobs
             var jobs = new JobRepository();
 
-            if (!jobs.Get().Any())
+            if (!jobs.Read().Any())
             {
                 jobs.Create(new Job
                 {

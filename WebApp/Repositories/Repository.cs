@@ -3,6 +3,7 @@
     using MongoDB.Bson;
     using MongoDB.Driver;
     using MongoDB.Driver.Builders;
+    using UpdateBuilder = MongoDB.Driver.Builders.Update;
     using OpenCat.Models;
     using System;
     using System.Linq;
@@ -11,24 +12,21 @@
 
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
-        protected MongoServer Server { get; set; }
-        public MongoDatabase Database { get; set; }
-        public MongoCollection<TEntity> Collection { get; set; }
+        public MongoDatabase Database { get { return Collection.Database; } }
+        public MongoCollection<TEntity> Collection { get; private set; }
 
         public Repository()
         {
-            Server = new MongoClient().GetServer();
             var dbName = ConfigurationManager.AppSettings["dbName"];
-            Database = Server.GetDatabase(dbName);
-            Collection = Database.GetCollection<TEntity>(typeof(TEntity).Name);
+            Collection = new MongoClient().GetServer().GetDatabase(dbName).GetCollection<TEntity>(typeof(TEntity).Name);
         }
 
-        public virtual IQueryable<TEntity> Get()
+        public virtual IQueryable<TEntity> Read()
         {
             return Collection.FindAll().AsQueryable();
         }
 
-        public virtual TEntity Get(string id)
+        public virtual TEntity Read(string id)
         {
             IMongoQuery query = Query.EQ("_id", id);
             return Collection.Find(query).FirstOrDefault();
@@ -43,7 +41,7 @@
             return entity;
         }
 
-        public virtual bool Edit(string id, TEntity entity)
+        public virtual bool Update(string id, TEntity entity)
         {
             IMongoQuery query = Query.EQ("_id", id);
             
@@ -52,7 +50,7 @@
             {
                 entity.id = id;
                 entity.updated_at = DateTime.UtcNow;
-                update = Update.Replace<TEntity>(entity);
+                update = UpdateBuilder.Replace<TEntity>(entity);
             }
             else
             {
@@ -64,10 +62,10 @@
                 {
                     if (ignored.Contains(field)) continue;
 
-                    updates.Add(Update.Set(field, document[field]));
+                    updates.Add(UpdateBuilder.Set(field, document[field]));
                 }
-                updates.Add(Update.Set("updated_at", DateTime.UtcNow));
-                update = Update.Combine(updates);
+                updates.Add(UpdateBuilder.Set("updated_at", DateTime.UtcNow));
+                update = UpdateBuilder.Combine(updates);
             }
 
             WriteConcernResult result = Collection.Update(query, update);

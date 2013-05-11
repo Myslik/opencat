@@ -19,12 +19,12 @@
 
         public IEnumerable<Job> Get()
         {
-            return Repository.Get();
+            return Repository.Read();
         }
 
         public Job Get(string id)
         {
-            var job = Repository.Get(id);
+            var job = Repository.Read(id);
             if (job == null) throw new HttpResponseException(HttpStatusCode.NotFound);
             return job;
         }
@@ -36,7 +36,7 @@
 
         public void Put(string id, Job job)
         {
-            var ok = Repository.Edit(id, job);
+            var ok = Repository.Update(id, job);
             if (!ok) throw new HttpResponseException(HttpStatusCode.BadRequest);
         }
 

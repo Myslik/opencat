@@ -5,20 +5,30 @@
     using System.Globalization;
     using System.Linq;
     using System.Web.Http;
+    using System.Net;
 
     public class LanguagesController : ApiController
     {
+        private IQueryable<Language> Languages { get; set; }
+
+        public LanguagesController()
+        {
+            Languages = CultureInfo.GetCultures(CultureTypes.AllCultures)
+                    .OrderBy(culture => culture.DisplayName)
+                    .Select(culture => new Language { id = culture.IetfLanguageTag, name = culture.DisplayName })
+                    .AsQueryable();
+        }
+
         public IEnumerable<Language> Get()
         {
-            return CultureInfo.GetCultures(CultureTypes.AllCultures).Take(40)
-                    .OrderBy(culture => culture.DisplayName)
-                    .Select(culture => new Language { id = culture.IetfLanguageTag, name = culture.DisplayName });
+            return Languages.AsEnumerable();
         }
 
         public Language Get(string id)
         {
-            var culture = CultureInfo.GetCultureInfo(id);
-            return new Language { id = culture.IetfLanguageTag, name = culture.DisplayName };
+            var language = Languages.Where(l => l.id == id).SingleOrDefault();
+            if (language == null) throw new HttpResponseException(HttpStatusCode.NotFound);
+            return language;
         }
     }
 }

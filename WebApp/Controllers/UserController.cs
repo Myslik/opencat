@@ -13,7 +13,6 @@
 
     public class UserController : Controller
     {
-        private static OpenIdRelyingParty openid = new OpenIdRelyingParty();
         private UserRepository Repository { get; set; }
 
         public UserController()
@@ -23,7 +22,7 @@
 
         private User EnsureUserExists(IAuthenticationResponse response)
         {
-            var user = Repository.Get().SingleOrDefault(u => u.identifier == response.ClaimedIdentifier.ToString());
+            var user = Repository.Read().SingleOrDefault(u => u.identifier == response.ClaimedIdentifier.ToString());
             if (user == null)
             {
                 var claim = response.GetExtension<ClaimsResponse>();

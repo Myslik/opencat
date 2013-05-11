@@ -21,7 +21,7 @@
 
         public ActionResult Index()
         {
-            var user = Repository.Get().Where(u => u.email == User.Identity.Name).FirstOrDefault();
+            var user = Repository.Read().Where(u => u.email == User.Identity.Name).FirstOrDefault();
             return View(user);
         }
 

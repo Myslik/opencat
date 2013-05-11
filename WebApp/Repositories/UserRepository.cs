@@ -24,7 +24,7 @@
 
         public bool Verify(string email, string password)
         {
-            var user = Get().Where(u => u.email == email).SingleOrDefault();
+            var user = Read().Where(u => u.email == email).SingleOrDefault();
 
             if (user == null) return false;
 

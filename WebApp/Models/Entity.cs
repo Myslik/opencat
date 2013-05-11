@@ -1,6 +1,7 @@
 ﻿namespace OpenCat.Models
 {
     using System;
+    using System.Collections.Generic;
     using MongoDB.Bson.Serialization.Attributes;
 
     public class Entity
@@ -10,6 +11,6 @@
         public DateTime updated_at { get; set; }
 
         [BsonIgnore]
-        public String[] fields { get; set; }
+        public IEnumerable<String> fields { get; set; }
     }
 }
