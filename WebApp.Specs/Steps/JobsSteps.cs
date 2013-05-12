@@ -12,7 +12,7 @@ namespace WebApp.Specs.Steps
     [Binding]
     public class JobsSteps : WebStepsBase
     {
-        [StepDefinition(@"I create following jobs"), Scope(Tag = "web")]
+        [StepDefinition(@"I create following jobs"), Scope(Tag = "WebUI")]
         public void WhenICreateFollowingJobs(Table table)
         {
             On<MainPage>().Visit("Jobs");
@@ -30,7 +30,7 @@ namespace WebApp.Specs.Steps
             }
         }
 
-        [Then(@"I can see following on jobs page"), Scope(Tag = "web")]
+        [Then(@"I can see following on jobs page"), Scope(Tag = "WebUI")]
         public void ThenICanSeeFollowingOnJobsPage(Table table)
         {
             On<MainPage>().Visit("Jobs");
@@ -43,7 +43,7 @@ namespace WebApp.Specs.Steps
             }
         }
 
-        [When(@"I delete job with name (.*)"), Scope(Tag = "web")]
+        [When(@"I delete job with name (.*)"), Scope(Tag = "WebUI")]
         public void WhenIDeleteJobWithName(string name)
         {
             On<MainPage>().Visit("Jobs");
@@ -54,7 +54,7 @@ namespace WebApp.Specs.Steps
             job.Remove.Click();
         }
 
-        [Then(@"There is no job with name (.*) on jobs page"), Scope(Tag = "web")]
+        [Then(@"There is no job with name (.*) on jobs page"), Scope(Tag = "WebUI")]
         public void ThenThereIsNoJobWithNameOnJobsPage(string name)
         {
             On<MainPage>().Visit("Jobs");
@@ -63,7 +63,7 @@ namespace WebApp.Specs.Steps
             Assert.IsNull(job, String.Format("Job with name {0} is still on the jobs page", name));
         }
 
-        [When(@"I visit job with name (.*)"), Scope(Tag = "web")]
+        [When(@"I visit job with name (.*)"), Scope(Tag = "WebUI")]
         public void WhenIVisitJobWithName(string name)
         {
             On<MainPage>().Visit("Jobs");
@@ -74,7 +74,7 @@ namespace WebApp.Specs.Steps
             job.Name.Click();
         }
 
-        [Then(@"I can edit the job"), Scope(Tag = "web")]
+        [Then(@"I can edit the job"), Scope(Tag = "WebUI")]
         public void ThenICanEditTheJob()
         {
             On<EditJobPage>(page =>
@@ -84,7 +84,7 @@ namespace WebApp.Specs.Steps
             });
         }
 
-        [When(@"I upload ""(.*)"" to job"), Scope(Tag = "web")]
+        [When(@"I upload ""(.*)"" to job"), Scope(Tag = "WebUI")]
         public void WhenIUploadToJob(string p0)
         {
             //var driver = WebDriver as OpenQA.Selenium.PhantomJS.PhantomJSDriver;            
@@ -98,7 +98,7 @@ namespace WebApp.Specs.Steps
             //On<EditJobPage>().Upload.SendKeys(Keys.Enter);
         }
 
-        [Then(@"There is ""(.*)"" in the attachments"), Scope(Tag = "web")]
+        [Then(@"There is ""(.*)"" in the attachments"), Scope(Tag = "WebUI")]
         public void ThenThereIsInTheAttachments(string p0)
         {
             var attachment = On<EditJobPage>().Attachments.FirstOrDefault(a => a.Name.Text == p0);

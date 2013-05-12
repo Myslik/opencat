@@ -19,7 +19,7 @@ namespace WebApp.Specs
             DataConfig.Initialize();
         }
 
-        [BeforeScenario, Scope(Tag = "web")]
+        [BeforeScenario, Scope(Tag = "WebUI")]
         public static void BeforeWebScenario()
         {
             WebController.Instance.Start();

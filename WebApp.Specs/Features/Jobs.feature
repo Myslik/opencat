@@ -3,7 +3,7 @@
 Background: 
 	Given I authenticate with valid credentials
 
-@web
+@WebUI
 Scenario: Create new job
 	When I create following jobs
 		| name      | description      | words |
@@ -12,7 +12,7 @@ Scenario: Create new job
 		| name      | description      | words |
 		| Butterfly | Beautiful animal | 123   |
 
-@web
+@WebUI
 Scenario: Edit job
 	When I create following jobs
 		| name      | description      | words |
@@ -20,7 +20,7 @@ Scenario: Edit job
 	 And I visit job with name Elephant
 	Then I can edit the job
 
-@web
+@WebUI
 Scenario: Upload file to job
 	When I create following jobs
 		| name      | description      | words |
@@ -29,7 +29,7 @@ Scenario: Upload file to job
 	 And I upload "1.xlz" to job
 	Then There is "1.xlz" in the attachments
 
-@web
+@WebUI
 Scenario: Remove job
 	When I create following jobs
 		| name      | description      | words |

@@ -9,7 +9,7 @@ namespace WebApp.Specs
     [Binding]
     public class NavigationSteps : WebStepsBase
     {
-        [Then(@"I can visit all sections"), Scope(Tag = "web")]
+        [Then(@"I can visit all sections"), Scope(Tag = "WebUI")]
         public void ThenICanVisitAllSections()
         {
             On<MainPage>(page =>

@@ -37,6 +37,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="MongoDB.Bson">
       <HintPath>..\packages\mongocsharpdriver.1.8.1\lib\net35\MongoDB.Bson.dll</HintPath>
     </Reference>
@@ -86,6 +87,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Navigation.feature</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\MongoMockHelper.cs" />
     <Compile Include="Helpers\WebElementExtension.cs" />
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\EditJobPage.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Helpers\WebController.cs" />
     <Compile Include="Helpers\WebStepsBase.cs" />
     <Compile Include="Helpers\WebSupport.cs" />
+    <Compile Include="Units\RepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -118,6 +121,8 @@
     </None>
     <None Include="Files\1.xlz" />
     <None Include="packages.config" />
+    <None Include="SeleniumTests.playlist" />
+    <None Include="UnitTests.playlist" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\packages\phantomjs.exe.1.8.1\tools\phantomjs\phantomjs.exe">

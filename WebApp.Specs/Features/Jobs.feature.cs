@@ -74,11 +74,11 @@ namespace WebApp.Specs.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Create new job")]
-        [NUnit.Framework.CategoryAttribute("web")]
+        [NUnit.Framework.CategoryAttribute("WebUI")]
         public virtual void CreateNewJob()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create new job", new string[] {
-                        "web"});
+                        "WebUI"});
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 3
@@ -111,11 +111,11 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Edit job")]
-        [NUnit.Framework.CategoryAttribute("web")]
+        [NUnit.Framework.CategoryAttribute("WebUI")]
         public virtual void EditJob()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Edit job", new string[] {
-                        "web"});
+                        "WebUI"});
 #line 16
 this.ScenarioSetup(scenarioInfo);
 #line 3
@@ -141,11 +141,11 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Upload file to job")]
-        [NUnit.Framework.CategoryAttribute("web")]
+        [NUnit.Framework.CategoryAttribute("WebUI")]
         public virtual void UploadFileToJob()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Upload file to job", new string[] {
-                        "web"});
+                        "WebUI"});
 #line 24
 this.ScenarioSetup(scenarioInfo);
 #line 3
@@ -173,11 +173,11 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Remove job")]
-        [NUnit.Framework.CategoryAttribute("web")]
+        [NUnit.Framework.CategoryAttribute("WebUI")]
         public virtual void RemoveJob()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove job", new string[] {
-                        "web"});
+                        "WebUI"});
 #line 33
 this.ScenarioSetup(scenarioInfo);
 #line 3

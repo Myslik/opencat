@@ -66,11 +66,11 @@ namespace WebApp.Specs.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Visit Login page")]
-        [NUnit.Framework.CategoryAttribute("web")]
+        [NUnit.Framework.CategoryAttribute("WebUI")]
         public virtual void VisitLoginPage()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Visit Login page", new string[] {
-                        "web"});
+                        "WebUI"});
 #line 4
 this.ScenarioSetup(scenarioInfo);
 #line 5
@@ -83,11 +83,11 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Valid Login")]
-        [NUnit.Framework.CategoryAttribute("web")]
+        [NUnit.Framework.CategoryAttribute("WebUI")]
         public virtual void ValidLogin()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Valid Login", new string[] {
-                        "web"});
+                        "WebUI"});
 #line 9
 this.ScenarioSetup(scenarioInfo);
 #line 10
@@ -100,11 +100,11 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Invalid Login")]
-        [NUnit.Framework.CategoryAttribute("web")]
+        [NUnit.Framework.CategoryAttribute("WebUI")]
         public virtual void InvalidLogin()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invalid Login", new string[] {
-                        "web"});
+                        "WebUI"});
 #line 14
 this.ScenarioSetup(scenarioInfo);
 #line 15
@@ -117,11 +117,11 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Logout")]
-        [NUnit.Framework.CategoryAttribute("web")]
+        [NUnit.Framework.CategoryAttribute("WebUI")]
         public virtual void Logout()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logout", new string[] {
-                        "web"});
+                        "WebUI"});
 #line 19
 this.ScenarioSetup(scenarioInfo);
 #line 20

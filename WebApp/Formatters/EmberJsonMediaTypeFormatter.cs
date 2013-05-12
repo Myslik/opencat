@@ -23,12 +23,12 @@ namespace OpenCat.Formatters
                     return GetDefaultValueForType(type);
                 }
 
-                var fields = (data[prefix] as JObject).Properties().Select(p => p.Name);
-
+                var properties = (data[prefix] as JObject).Properties().Select(p => p.Name);
+                
                 var serializer = JsonSerializer.Create(SerializerSettings);
 
                 Entity entity = data[prefix].ToObject(type, serializer) as Entity;
-                entity.fields = fields.AsEnumerable();
+                entity.properties = properties.AsEnumerable();
                 return entity;
             });
         }

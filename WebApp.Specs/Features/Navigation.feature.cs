@@ -74,11 +74,11 @@ namespace WebApp.Specs.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Navigate to all sections")]
-        [NUnit.Framework.CategoryAttribute("web")]
+        [NUnit.Framework.CategoryAttribute("WebUI")]
         public virtual void NavigateToAllSections()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigate to all sections", new string[] {
-                        "web"});
+                        "WebUI"});
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 3

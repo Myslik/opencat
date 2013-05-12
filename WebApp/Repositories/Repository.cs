@@ -21,6 +21,16 @@
             Collection = new MongoClient().GetServer().GetDatabase(dbName).GetCollection<TEntity>(typeof(TEntity).Name);
         }
 
+        public Repository(MongoCollection<TEntity> collection)
+        {
+            Collection = collection;
+        }
+
+        protected IEnumerable<string> Ignore
+        {
+            get { return new string[] { "_id", "id", "created_at", "updated_at" }; }
+        }
+
         public virtual IQueryable<TEntity> Read()
         {
             return Collection.FindAll().AsQueryable();
@@ -28,54 +38,45 @@
 
         public virtual TEntity Read(string id)
         {
-            IMongoQuery query = Query.EQ("_id", id);
+            var query = Query.EQ("_id", id);
             return Collection.Find(query).FirstOrDefault();
         }
 
         public virtual TEntity Create(TEntity entity)
         {
             entity.id = ObjectId.GenerateNewId().ToString();
-            entity.created_at = DateTime.UtcNow;
-            entity.updated_at = DateTime.UtcNow;
+            var now = DateTime.UtcNow;
+            entity.created_at = now;
+            entity.updated_at = now;
             Collection.Insert(entity);
             return entity;
         }
 
         public virtual bool Update(string id, TEntity entity)
         {
-            IMongoQuery query = Query.EQ("_id", id);
-            
-            IMongoUpdate update;
-            if (entity.fields == null)
+            var query = Query.EQ("_id", id);
+
+            var updates = new List<IMongoUpdate>();
+            var document = entity.ToBsonDocument();
+            var properties = (entity.properties ?? document.Elements.Select(e => e.Name)).Except(Ignore);
+
+            foreach (var property in properties)
             {
-                entity.id = id;
-                entity.updated_at = DateTime.UtcNow;
-                update = UpdateBuilder.Replace<TEntity>(entity);
+                updates.Add(UpdateBuilder.Set(property, document[property]));
             }
-            else
+            if (updates.Count > 0)
             {
-                var ignored = new string[] { "_id", "id", "created_at", "updated_at" };
-
-                var updates = new List<IMongoUpdate>();
-                var document = entity.ToBsonDocument();
-                foreach (var field in entity.fields)
-                {
-                    if (ignored.Contains(field)) continue;
-
-                    updates.Add(UpdateBuilder.Set(field, document[field]));
-                }
                 updates.Add(UpdateBuilder.Set("updated_at", DateTime.UtcNow));
-                update = UpdateBuilder.Combine(updates);
             }
 
-            WriteConcernResult result = Collection.Update(query, update);
+            var result = Collection.Update(query, UpdateBuilder.Combine(updates));
             return result.UpdatedExisting;
         }
 
         public virtual bool Delete(string id)
         {
-            IMongoQuery query = Query.EQ("_id", id);
-            WriteConcernResult result = Collection.Remove(query);
+            var query = Query.EQ("_id", id);
+            var result = Collection.Remove(query);
             return result.DocumentsAffected == 1;
         }
     }

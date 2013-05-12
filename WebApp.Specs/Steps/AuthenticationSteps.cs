@@ -11,20 +11,20 @@ namespace WebApp.Specs
     [Binding]
     public class AuthenticationSteps : WebStepsBase
     {
-        [Given(@"I open the landing page"), Scope(Tag = "web")]
+        [Given(@"I open the landing page"), Scope(Tag = "WebUI")]
         public void GivenIOpenTheLandingPage()
         {
             GoHome();
         }
 
-        [Then(@"I should see the login form"), Scope(Tag = "web")]
+        [Then(@"I should see the login form"), Scope(Tag = "WebUI")]
         public void ThenIShouldSeeTheLoginForm()
         {
             Assert.AreEqual("OpenCAT", WebDriver.Title);
             Assert.AreEqual("Please sign in", On<LoginPage>().Heading.Text);
         }
 
-        [StepDefinition(@"I authenticate with valid credentials"), Scope(Tag = "web")]
+        [StepDefinition(@"I authenticate with valid credentials"), Scope(Tag = "WebUI")]
         public void WhenIAuthenticateWithValidCredentials()
         {
             GoHome();
@@ -36,7 +36,7 @@ namespace WebApp.Specs
             });
         }
 
-        [When(@"I authenticate with invalid credentials"), Scope(Tag = "web")]
+        [When(@"I authenticate with invalid credentials"), Scope(Tag = "WebUI")]
         public void WhenIAuthenticateWithInvalidCredentials()
         {
             GoHome();
@@ -48,19 +48,19 @@ namespace WebApp.Specs
             });
         }
 
-        [Then(@"I should be redirected to application"), Scope(Tag = "web")]
+        [Then(@"I should be redirected to application"), Scope(Tag = "WebUI")]
         public void ThenIShouldBeRedirectedToApplication()
         {
             Assert.AreEqual("OpenCAT", WebDriver.FindElement(By.TagName("h1")).Text);
         }
 
-        [Then(@"I should see invalid credentials message"), Scope(Tag = "web")]
+        [Then(@"I should see invalid credentials message"), Scope(Tag = "WebUI")]
         public void ThenIShouldSeeInvalidCredentialsMessage()
         {
             Assert.AreEqual("Authentication failed", On<LoginPage>().Alert.Text);
         }
 
-        [When(@"I log out"), Scope(Tag = "web")]
+        [When(@"I log out"), Scope(Tag = "WebUI")]
         public void WhenILogOut()
         {
             On<MainPage>().Logout.Click();
