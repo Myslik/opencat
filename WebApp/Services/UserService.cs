@@ -1,13 +1,15 @@
-﻿namespace OpenCat.Data
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
-    using OpenCat.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using OpenCat.Models;
 
-    public class UserRepository : Repository<User>
+namespace OpenCat.Services
+{
+    public class UserService : Service<User>
     {
+        public UserService(IRepository<User> repository) : base(repository) { }
+
         public override User Create(User entity)
         {
             entity.GeneratePassword();

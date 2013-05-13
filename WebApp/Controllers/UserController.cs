@@ -4,25 +4,25 @@
     using DotNetOpenAuth.OpenId;
     using DotNetOpenAuth.OpenId.Extensions.SimpleRegistration;
     using DotNetOpenAuth.OpenId.RelyingParty;
-    using OpenCat.Data;
     using OpenCat.Models;
     using System;
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.Security;
+    using OpenCat.Services;
 
     public class UserController : Controller
     {
-        private UserRepository Repository { get; set; }
+        private UserService Users { get; set; }
 
-        public UserController()
+        public UserController(UserService service)
         {
-            Repository = new UserRepository();
+            Users = service;
         }
 
         private User EnsureUserExists(IAuthenticationResponse response)
         {
-            var user = Repository.Read().SingleOrDefault(u => u.identifier == response.ClaimedIdentifier.ToString());
+            var user = Users.Read().SingleOrDefault(u => u.identifier == response.ClaimedIdentifier.ToString());
             if (user == null)
             {
                 var claim = response.GetExtension<ClaimsResponse>();
@@ -34,7 +34,7 @@
                     email = claim.Email
                 };
 
-                return Repository.Create(user);
+                return Users.Create(user);
             }
             return user;
         }
@@ -78,7 +78,7 @@
         {
             if (String.IsNullOrEmpty(loginIdentifier))
             {
-                if (Repository.Verify(email, password))
+                if (Users.Verify(email, password))
                 {
                     FormsAuthentication.RedirectFromLoginPage(email, false);
                 }

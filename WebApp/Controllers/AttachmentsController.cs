@@ -3,20 +3,20 @@
     using MongoDB.Bson;
     using MongoDB.Driver.Builders;
     using MongoDB.Driver.GridFS;
-    using OpenCat.Data;
     using OpenCat.Models;
     using System;
     using System.Collections.Generic;
     using System.Net;
     using System.Web.Mvc;
+    using OpenCat.Services;
 
     public class AttachmentsController : Controller
     {
-        private JobRepository Jobs { get; set; }
+        private JobService Jobs { get; set; }
 
-        public AttachmentsController()
+        public AttachmentsController(JobService service)
         {
-            Jobs = new JobRepository();
+            Jobs = service;
         }
 
         [NonAction]

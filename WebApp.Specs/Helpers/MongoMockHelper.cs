@@ -7,8 +7,8 @@ namespace WebApp.Specs
 {
     public class MongoMockHelper
     {
-        public MongoServer Server { get; private set; }
-        public MongoDatabase Database { get; private set; }
+        public Mock<MongoServer> Server { get; private set; }
+        public Mock<MongoDatabase> Database { get; private set; }
 
         public MongoServerSettings ServerSettings { get; private set; }
         public MongoDatabaseSettings DatabaseSettings { get; private set; }
@@ -25,10 +25,9 @@ namespace WebApp.Specs
                 WriteConcern = new WriteConcern(),
                 WriteEncoding = new UTF8Encoding()
             };
-            var server = new Mock<MongoServer>(ServerSettings);
-            server.Setup(s => s.Settings).Returns(ServerSettings);
-            server.Setup(s => s.IsDatabaseNameValid(It.IsAny<string>(), out message)).Returns(true);
-            Server = server.Object;
+            Server = new Mock<MongoServer>(ServerSettings);
+            Server.Setup(s => s.Settings).Returns(ServerSettings);
+            Server.Setup(s => s.IsDatabaseNameValid(It.IsAny<string>(), out message)).Returns(true);
 
             DatabaseSettings = new MongoDatabaseSettings()
             {
@@ -38,10 +37,9 @@ namespace WebApp.Specs
                 WriteConcern = new WriteConcern(),
                 WriteEncoding = new UTF8Encoding()
             };
-            var database = new Mock<MongoDatabase>(Server, "UnitTestDB", DatabaseSettings);
-            database.Setup(db => db.Settings).Returns(DatabaseSettings);
-            database.Setup(db => db.IsCollectionNameValid(It.IsAny<string>(), out message)).Returns(true);
-            Database = database.Object;
+            Database = new Mock<MongoDatabase>(Server.Object, "UnitTestDB", DatabaseSettings);
+            Database.Setup(db => db.Settings).Returns(DatabaseSettings);
+            Database.Setup(db => db.IsCollectionNameValid(It.IsAny<string>(), out message)).Returns(true);
 
             CollectionSettings = new MongoCollectionSettings()
             {
@@ -53,9 +51,15 @@ namespace WebApp.Specs
             };
         }
 
-        public Mock<MongoCollection<T>> MockCollection<T>()
+        public Mock<MongoCollection<T>> CollectionByEntity<T>()
         {
-            return new Mock<MongoCollection<T>>(Database, typeof(T).Name, CollectionSettings);
+            return new Mock<MongoCollection<T>>(Database.Object, typeof(T).Name, CollectionSettings);
+        }
+
+        public Mock<MongoDatabase> DatabaseByEntity<T>(Mock<MongoCollection<T>> collection)
+        {
+            Database.Setup(db => db.GetCollection<T>(typeof(T).Name)).Returns(collection.Object);
+            return Database;
         }
     }
 

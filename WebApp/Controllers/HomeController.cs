@@ -1,6 +1,5 @@
 ﻿namespace OpenCat.Controllers
 {
-    using OpenCat.Data;
     using OpenCat.Models;
     using System;
     using System.Linq;
@@ -9,19 +8,20 @@
     using System.Web.Security;
     using MongoDB.Driver;
     using System.Configuration;
+    using OpenCat.Services;
 
     public class HomeController : Controller
     {
-        private UserRepository Repository { get; set; }
+        private UserService Users { get; set; }
 
-        public HomeController()
+        public HomeController(UserService service)
         {
-            Repository = new UserRepository();
+            Users = service;
         }
 
         public ActionResult Index()
         {
-            var user = Repository.Read().Where(u => u.email == User.Identity.Name).FirstOrDefault();
+            var user = Users.Read().Where(u => u.email == User.Identity.Name).FirstOrDefault();
             return View(user);
         }
 

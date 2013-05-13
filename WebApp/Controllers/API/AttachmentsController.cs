@@ -2,20 +2,20 @@
 {
     using MongoDB.Bson;
     using MongoDB.Driver.Builders;
-    using OpenCat.Data;
     using OpenCat.Models;
     using System.Collections.Generic;
     using System.Linq;
     using System.Net;
     using System.Web.Http;
+    using OpenCat.Services;
 
     public class AttachmentsController : ApiController
     {
-        private JobRepository Jobs { get; set; }
+        private JobService Jobs { get; set; }
 
-        public AttachmentsController()
+        public AttachmentsController(JobService service)
         {
-            Jobs = new JobRepository();
+            Jobs = service;
         }
 
         public IEnumerable<Attachment> Get([FromUri] string[] ids)

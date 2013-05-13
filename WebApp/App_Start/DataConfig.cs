@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
-using OpenCat.Data;
+using System.Web.Http;
+using MongoDB.Driver;
 using OpenCat.Models;
+using OpenCat.Services;
 
 namespace OpenCat
 {
@@ -11,8 +14,11 @@ namespace OpenCat
     {
         public static void Initialize()
         {
+            var dbName = ConfigurationManager.AppSettings["dbName"];
+            var database = new MongoClient().GetServer().GetDatabase(dbName);
+
             // Users
-            var users = new UserRepository();
+            var users = new UserService(new Repository<User>(database));
 
             if (!users.Read().Any(u => u.email == "user@gmail.com"))
             {
@@ -24,7 +30,7 @@ namespace OpenCat
             }
 
             // Jobs
-            var jobs = new JobRepository();
+            var jobs = new JobService(new Repository<Job>(database));
 
             if (!jobs.Read().Any())
             {

@@ -1,10 +1,9 @@
-﻿namespace OpenCat.Data
+﻿namespace OpenCat.Models
 {
     using MongoDB.Bson;
     using MongoDB.Driver;
     using MongoDB.Driver.Builders;
     using UpdateBuilder = MongoDB.Driver.Builders.Update;
-    using OpenCat.Models;
     using System;
     using System.Linq;
     using System.Collections.Generic;
@@ -12,18 +11,14 @@
 
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
-        public MongoDatabase Database { get { return Collection.Database; } }
-        public MongoCollection<TEntity> Collection { get; private set; }
-
-        public Repository()
-        {
-            var dbName = ConfigurationManager.AppSettings["dbName"];
-            Collection = new MongoClient().GetServer().GetDatabase(dbName).GetCollection<TEntity>(typeof(TEntity).Name);
+        public MongoDatabase Database { get; private set; }
+        public MongoCollection<TEntity> Collection { 
+            get { return Database.GetCollection<TEntity>(typeof(TEntity).Name); } 
         }
 
-        public Repository(MongoCollection<TEntity> collection)
+        public Repository(MongoDatabase database)
         {
-            Collection = collection;
+            Database = database;
         }
 
         protected IEnumerable<string> Ignore

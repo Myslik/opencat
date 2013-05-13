@@ -6,7 +6,6 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using Moq;
 using NUnit.Framework;
-using OpenCat.Data;
 using OpenCat.Models;
 
 namespace WebApp.Specs.Units
@@ -26,9 +25,8 @@ namespace WebApp.Specs.Units
         protected void SetUp()
         {
             var mongo = new MongoMockHelper();
-            collection = mongo.MockCollection<NamedEntity>();
-
-            repository = new Repository<NamedEntity>(collection.Object);
+            collection = mongo.CollectionByEntity<NamedEntity>();
+            repository = new Repository<NamedEntity>(mongo.DatabaseByEntity<NamedEntity>(collection).Object);
         }
 
         [Test]
