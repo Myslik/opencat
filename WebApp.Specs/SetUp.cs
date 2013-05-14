@@ -9,7 +9,7 @@ using OpenCat;
 namespace WebApp.Specs
 {
     [SetUpFixture]
-    public class SetUp
+    public class SetUp : IDisposable
     {
         private Process iisexpress;
 
@@ -58,6 +58,29 @@ namespace WebApp.Specs
             if (!iisexpress.HasExited)
             {
                 iisexpress.Kill();
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~SetUp()
+        {
+            Dispose(false);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (iisexpress != null)
+                {
+                    iisexpress.Dispose();
+                    iisexpress = null;
+                }
             }
         }
     }
