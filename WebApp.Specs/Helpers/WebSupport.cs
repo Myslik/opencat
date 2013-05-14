@@ -12,9 +12,7 @@ namespace WebApp.Specs
         [BeforeFeature]
         public static void BeforeWebFeature()
         {
-            var dbName = ConfigurationManager.AppSettings["dbName"];
-            var server = new MongoClient().GetServer();
-            var database = server.GetDatabase(dbName);
+            var database = BusinessHelper.Database;
             database.Drop();
             DataConfig.Initialize();
         }

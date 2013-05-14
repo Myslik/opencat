@@ -87,6 +87,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Navigation.feature</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BusinessHelper.cs" />
     <Compile Include="Helpers\MongoMockHelper.cs" />
     <Compile Include="Helpers\WebElementExtension.cs" />
     <Compile Include="Pages\BasePage.cs" />

@@ -164,7 +164,7 @@ this.FeatureBackground();
 #line 28
   testRunner.And("I visit job with name Kangoroo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 29
-  testRunner.And("I upload \"1.xlz\" to job", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("I upload \"1.xlz\" to job with name Kangoroo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 30
  testRunner.Then("There is \"1.xlz\" in the attachments", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

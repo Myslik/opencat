@@ -86,19 +86,18 @@ namespace WebApp.Specs.Steps
             });
         }
 
-        [When(@"I upload ""(.*)"" to job"), Scope(Tag = "WebUI")]
-        public void WhenIUploadToJob(string p0)
+        [When(@"I upload ""(.*)"" to job with name (.*)"), Scope(Tag = "WebUI")]
+        public void WhenIUploadToJob(string p0, string p1)
         {
-            On<EditJobPage>().Upload.SendKeys(File(p0) + Keys.Enter);
-            Thread.Sleep(1000);
-            //On<EditJobPage>().Upload.SendKeys(Keys.Enter);
+            BusinessHelper.UploadFileToJob(p1, p0, System.IO.File.OpenRead(File(p0)));
+            WebDriver.Navigate().Refresh();
         }
 
         [Then(@"There is ""(.*)"" in the attachments"), Scope(Tag = "WebUI")]
         public void ThenThereIsInTheAttachments(string p0)
         {
             var attachment = On<EditJobPage>().Attachments.FirstOrDefault(a => a.Name.Text == p0);
-            Assert.IsNull(attachment, String.Format("Attachment with name {0} was not found in attachments", p0));
+            Assert.IsNotNull(attachment, String.Format("Attachment with name {0} was not found in attachments", p0));
         }
 
     }

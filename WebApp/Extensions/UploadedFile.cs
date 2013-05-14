@@ -4,7 +4,7 @@
 
     public class UploadedFile
     {
-        internal UploadedFile(string fileName, Stream inputStream)
+        public UploadedFile(string fileName, Stream inputStream)
         {
             FileName = fileName;
             InputStream = inputStream;

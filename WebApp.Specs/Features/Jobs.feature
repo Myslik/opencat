@@ -26,7 +26,7 @@ Scenario: Upload file to job
 		| name      | description      | words |
 		| Kangoroo  | Jumpy            | 456   |
 	 And I visit job with name Kangoroo
-	 And I upload "1.xlz" to job
+	 And I upload "1.xlz" to job with name Kangoroo
 	Then There is "1.xlz" in the attachments
 
 @WebUI

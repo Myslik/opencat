@@ -77,7 +77,7 @@ namespace OpenCat.Services
             var info = gfs.Upload(file.InputStream, file.FileName, options);
 
             var query = Query.EQ("_id", job_id);
-            var update = UpdateBuilder.AddToSet("attachment_ids", info.Id);
+            var update = UpdateBuilder.AddToSet("attachment_ids", info.Id.ToString());
             Jobs.Collection.Update(query, update);
         }
 
