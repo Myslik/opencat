@@ -1,43 +1,36 @@
 ﻿namespace OpenCat.ApiControllers
 {
-    using MongoDB.Bson;
-    using MongoDB.Driver.Builders;
     using OpenCat.Models;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Net;
     using System.Web.Http;
     using OpenCat.Services;
 
     public class AttachmentsController : ApiController
     {
-        private JobService Jobs { get; set; }
+        private AttachmentService Attachments { get; set; }
 
-        public AttachmentsController(JobService service)
+        public AttachmentsController(AttachmentService attachments)
         {
-            Jobs = service;
+            Attachments = attachments;
         }
 
         public IEnumerable<Attachment> Get([FromUri] string[] ids)
         {
             if (ids.Length > 0)
             {
-                var query = Query.In("_id", new BsonArray(ids.Select(id => ObjectId.Parse(id))));
-                return Jobs.Database.GridFS.Find(query).Select(info => Attachment.FromFileInfo(info));
+                return Attachments.Read(ids);
             }
-            return Jobs.Database.GridFS.FindAll().Select(info => Attachment.FromFileInfo(info));
+            return Attachments.Read();
         }
 
         public Attachment Get(string id)
         {
-            var file = Jobs.Database.GridFS.FindOne(Query.EQ("_id", id));
-            return Attachment.FromFileInfo(file);
+            return Attachments.Read(id);
         }
 
         public void Delete(string id)
         {
-            Jobs.Collection.Update(Query.Exists("attachment_ids"), Update.Pull("attachment_ids", id));
-            Jobs.Database.GridFS.DeleteById(ObjectId.Parse(id));
+            Attachments.Delete(id);
         }
     }
 }

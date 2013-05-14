@@ -24,6 +24,9 @@ namespace WebApp.Specs
             if (Selenium != null)
                 return;
 
+            var options = new PhantomJSOptions();
+            //options.
+
             Selenium = new PhantomJSDriver();
             Selenium.Manage().Timeouts().ImplicitlyWait(DefaultTimeout);
 

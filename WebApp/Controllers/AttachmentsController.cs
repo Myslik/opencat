@@ -13,35 +13,12 @@
     public class AttachmentsController : Controller
     {
         private JobService Jobs { get; set; }
+        private AttachmentService Attachments { get; set; }
 
-        public AttachmentsController(JobService service)
+        public AttachmentsController(JobService jobs, AttachmentService attachments)
         {
-            Jobs = service;
-        }
-
-        [NonAction]
-        private Job CreateJob()
-        {
-            var job = new Job
-            {
-                name = DateTime.Now.Ticks.ToString(),
-                words = 0
-            };
-            Jobs.Create(job);
-            return job;
-        }
-
-        [NonAction]
-        private Job UploadFile(Job job, UploadedFile file)
-        {
-            var gfs = Jobs.Database.GridFS;
-            var options = new MongoGridFSCreateOptions
-            {
-                Metadata = new BsonDocument(new BsonElement ("job_id", job.id))
-            };
-            var info = gfs.Upload(file.InputStream, file.FileName, options);
-            job.attachment_ids.Add(info.Id.ToString());
-            return job;
+            Jobs = jobs;
+            Attachments = attachments;
         }
 
         [HttpPost]
@@ -49,9 +26,11 @@
         {
             return this.UploadFiles(file =>
             {
-                var job = CreateJob();
-                job = UploadFile(job, file);
-                Jobs.Update(job.id, job);
+                var job = Jobs.Create(new Job
+                {
+                    name = DateTime.Now.Ticks.ToString()
+                });
+                Attachments.Upload(job.id, file);
             });
         }
 
@@ -60,17 +39,15 @@
         {
             return this.UploadFiles(file =>
             {
-                var job = Jobs.Read(id);
-                job = UploadFile(job, file);
-                Jobs.Update(job.id, job);
+                Attachments.Upload(id, file);
             });
         }
 
         [HttpGet]
         public ActionResult Download(string id)
         {
-            var file = Jobs.Database.GridFS.FindOne(Query.EQ("_id", ObjectId.Parse(id)));
-            return File(file.OpenRead(), "application/octet-stream", file.Name);
+            var attachment = Attachments.Read(id);
+            return File(attachment.OpenRead(), "application/octet-stream", attachment.name);
         }
     }
 }

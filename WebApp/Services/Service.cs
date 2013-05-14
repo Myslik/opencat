@@ -10,8 +10,6 @@ namespace OpenCat.Services
     public class Service<TEntity> : IService<TEntity> where TEntity : Entity
     {
         protected IRepository<TEntity> Repository { get; private set; }
-        public MongoDatabase Database { get { return Repository.Database; } }
-        public MongoCollection<TEntity> Collection { get { return Repository.Collection; } }
 
         public Service(IRepository<TEntity> repository)
         {

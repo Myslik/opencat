@@ -3,6 +3,8 @@
     using MongoDB.Bson;
     using MongoDB.Driver.GridFS;
     using System;
+    using Newtonsoft.Json;
+    using System.IO;
 
     public class Attachment : Entity
     {
@@ -13,22 +15,11 @@
         public string content_type { get; set; }
         public string job_id { get; set; }
 
-        public static Attachment FromFileInfo(MongoGridFSFileInfo info)
+        [JsonIgnore]
+        public MongoGridFSFileInfo info { get; set; }
+        public Stream OpenRead()
         {
-            var attachment = new Attachment
-            {
-                id = info.Id.ToString(),
-                name = info.Name,
-                size = info.Length,
-                md5 = info.MD5,
-                uploaded_at = info.UploadDate,
-                content_type = info.ContentType
-            };
-            if (info.Metadata.Contains("job_id"))
-            {
-                attachment.job_id = info.Metadata["job_id"].ToString();
-            }
-            return attachment;
+            return info == null ? Stream.Null : info.OpenRead();
         }
     }
 }

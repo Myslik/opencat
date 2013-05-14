@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
@@ -26,6 +27,7 @@ namespace WebApp.Specs.Steps
                     page.Description.SendKeys(row["description"]);
                     page.Words.SendKeys(row["words"]);
                     page.Save.Click();
+                    Thread.Sleep(1000);
                 });
             }
         }
@@ -87,14 +89,8 @@ namespace WebApp.Specs.Steps
         [When(@"I upload ""(.*)"" to job"), Scope(Tag = "WebUI")]
         public void WhenIUploadToJob(string p0)
         {
-            //var driver = WebDriver as OpenQA.Selenium.PhantomJS.PhantomJSDriver;            
-
-            //var detector = new LocalFileDetector();
-            //driver.FileDetector = detector;
-            //Console.WriteLine("Detector: " + detector.IsFile(File(p0)));
-            
-            //Console.WriteLine("Driver: " + driver.FileDetector.IsFile(File(p0)));
-            //On<EditJobPage>().Upload.SendKeys(File(p0));
+            On<EditJobPage>().Upload.SendKeys(File(p0) + Keys.Enter);
+            Thread.Sleep(1000);
             //On<EditJobPage>().Upload.SendKeys(Keys.Enter);
         }
 
