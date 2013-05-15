@@ -16,9 +16,13 @@
                 "~/Scripts/ember-data-latest.js", 
                 "~/Scripts/fileuploader.js", 
                 "~/Scripts/select2.js"));
-            bundles.Add(new ScriptBundle("~/bundles/application").IncludeDirectory("~/Client/", "*.js", true));
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include("~/Scripts/modernizr-*"));
-            bundles.Add(new StyleBundle("~/Content/css").IncludeDirectory("~/Content/", "*.css", false));
+            bundles.Add(new ScriptBundle("~/bundles/application")
+                .IncludeDirectory("~/Client/", "*.js", true));
+            bundles.Add(new ScriptBundle("~/bundles/modernizr")
+                .Include("~/Scripts/modernizr-*"));
+            bundles.Add(new StyleBundle("~/Content/css")
+                .IncludeDirectory("~/Content/", "*.css", false)
+                .IncludeDirectory("~/Client/", "*.css", true));
         }
     }
 }
