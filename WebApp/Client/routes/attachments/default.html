@@ -4,7 +4,7 @@
             <td><i class="icon-file"></i> <a class="attachment-name" {{bindAttr href="attachment.link"}}>{{attachment.name}}</a></td>
             <td style="width: 200px;"><span class="text-info">{{ago attachment.uploadedAt}}</span></td>
             <td style="width: 120px;"><span class="muted">{{attachment.size}}bytes</span></td>
-            <td style="width: 20px;"><a href="#" {{action removeAttachment attachment}}><i class="icon-trash"></i></a></td>
+            <td style="width: 20px;"><a href="#" class="attachment-remove" {{action removeAttachment attachment}}><i class="icon-trash"></i></a></td>
         </tr>
     {{/each}}
 </tbody>

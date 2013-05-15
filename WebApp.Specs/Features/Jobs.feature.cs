@@ -172,11 +172,11 @@ this.FeatureBackground();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Remove job")]
+        [NUnit.Framework.DescriptionAttribute("Delete file from job")]
         [NUnit.Framework.CategoryAttribute("WebUI")]
-        public virtual void RemoveJob()
+        public virtual void DeleteFileFromJob()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove job", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete file from job", new string[] {
                         "WebUI"});
 #line 33
 this.ScenarioSetup(scenarioInfo);
@@ -188,14 +188,50 @@ this.FeatureBackground();
                         "description",
                         "words"});
             table5.AddRow(new string[] {
-                        "Cocroach",
-                        "Cannot be killed",
-                        "321"});
+                        "Croco",
+                        "Sneaky",
+                        "456"});
 #line 34
  testRunner.When("I create following jobs", ((string)(null)), table5, "When ");
 #line 37
-  testRunner.And("I delete job with name Cocroach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("I visit job with name Croco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 38
+  testRunner.And("I upload \"1.xlz\" to job with name Croco", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 39
+ testRunner.Then("There is \"1.xlz\" in the attachments", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 40
+ testRunner.When("I remove attachment \"1.xlz\" from the job", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 41
+ testRunner.Then("There is no \"1.xlz\" in the attachments", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Remove job")]
+        [NUnit.Framework.CategoryAttribute("WebUI")]
+        public virtual void RemoveJob()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Remove job", new string[] {
+                        "WebUI"});
+#line 44
+this.ScenarioSetup(scenarioInfo);
+#line 3
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "name",
+                        "description",
+                        "words"});
+            table6.AddRow(new string[] {
+                        "Cocroach",
+                        "Cannot be killed",
+                        "321"});
+#line 45
+ testRunner.When("I create following jobs", ((string)(null)), table6, "When ");
+#line 48
+  testRunner.And("I delete job with name Cocroach", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 49
  testRunner.Then("There is no job with name Cocroach on jobs page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

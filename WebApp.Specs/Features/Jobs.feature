@@ -30,6 +30,17 @@ Scenario: Upload file to job
 	Then There is "1.xlz" in the attachments
 
 @WebUI
+Scenario: Delete file from job
+	When I create following jobs
+		| name      | description      | words |
+		| Croco     | Sneaky           | 456   |
+	 And I visit job with name Croco
+	 And I upload "1.xlz" to job with name Croco
+	Then There is "1.xlz" in the attachments
+	When I remove attachment "1.xlz" from the job
+	Then There is no "1.xlz" in the attachments
+
+@WebUI
 Scenario: Remove job
 	When I create following jobs
 		| name      | description      | words |

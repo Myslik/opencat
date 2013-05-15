@@ -19,6 +19,7 @@ namespace WebApp.Specs.Pages
             public IWebElement Element { get; private set; }
 
             public IWebElement Name { get { return Element.FindElement(By.ClassName("attachment-name")); } }
+            public IWebElement Remove { get { return Element.FindElement(By.ClassName("attachment-remove")); } }
         }
 
         public IWebElement Name

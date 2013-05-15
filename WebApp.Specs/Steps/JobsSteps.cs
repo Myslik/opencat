@@ -100,5 +100,21 @@ namespace WebApp.Specs.Steps
             Assert.IsNotNull(attachment, String.Format("Attachment with name {0} was not found in attachments", p0));
         }
 
+        [When(@"I remove attachment ""(.*)"" from the job")]
+        public void WhenIRemoveAttachmentFromTheJob(string p0)
+        {
+            On<EditJobPage>(page =>
+            {
+                page.Attachments.First(a => a.Name.Text == p0).Remove.Click();
+            });
+        }
+
+        [Then(@"There is no ""(.*)"" in the attachments")]
+        public void ThenThereIsNoInTheAttachments(string p0)
+        {
+            var attachment = On<EditJobPage>().Attachments.FirstOrDefault(a => a.Name.Text == p0);
+            Assert.IsNull(attachment, String.Format("Attachment with name {0} was not found in attachments", p0));
+        }
+
     }
 }
