@@ -29,7 +29,9 @@ namespace OpenCat
                 var dbName = ConfigurationManager.AppSettings["dbName"];
                 return new MongoClient().GetServer().GetDatabase(dbName);
             }).As<MongoDatabase>().InstancePerHttpRequest();
+
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerHttpRequest();
+
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                 .Where(t => t.Name.EndsWith("Service"))
                 .AsSelf().InstancePerHttpRequest();

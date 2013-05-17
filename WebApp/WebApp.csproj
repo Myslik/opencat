@@ -265,14 +265,15 @@
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Client\controls\extension.css" />
+    <Content Include="Client\controls\extension.js" />
     <Content Include="Client\routes\api\controller.js" />
     <Content Include="Client\app.js" />
     <Content Include="Client\routes\attachments\controller.js" />
     <Content Include="Client\models\attachment.js" />
     <Content Include="Client\routes\attachments\view.js" />
-    <Content Include="Client\components\editor\editor.js" />
-    <Content Include="Client\components\languages\languages.js" />
-    <Content Include="Client\components\uploader\uploader.js" />
+    <Content Include="Client\controls\languages\languages.js" />
+    <Content Include="Client\controls\uploader\uploader.js" />
     <Content Include="Client\routes\jobs\default.html" />
     <Content Include="Client\routes\jobs\index\controller.js" />
     <Content Include="Client\models\job.js" />
@@ -287,8 +288,6 @@
     <Content Include="Client\store.js" />
     <Content Include="Client\routes\application.html" />
     <Content Include="Client\routes\attachments\default.html" />
-    <Content Include="Client\components\editor\editorArea.html" />
-    <Content Include="Client\components\editor\editor.html" />
     <Content Include="Client\routes\job\default.html" />
     <Content Include="Client\routes\jobs\index\default.html" />
     <Content Include="Client\routes\jobs\new\default.html" />
@@ -297,10 +296,9 @@
     <Content Include="Client\routes\attachments\attachments.css" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Client\components\editor\editor.css" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
-    <Content Include="Client\components\languages\languages.css" />
+    <Content Include="Client\controls\languages\languages.css" />
     <Content Include="Content\select2.css" />
     <Content Include="Images\book.png" />
     <Content Include="LICENSE.txt" />

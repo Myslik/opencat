@@ -1,10 +1,10 @@
 ﻿<img alt="job" src="/Images/book.png" style="float: left; margin-right: 10px;" />
 <div style="margin-left: 42px; font-size:large; font-weight: bold;">
-    {{view App.TextEditor id="name" valueBinding="content.name"}}
+    {{view Ember.TextField id="name" valueBinding="name" action="save"}}
 </div>
 <hr class="clearfix" style="margin: 10px 0;" />
 
-{{view App.TextAreaEditor id="description" valueBinding="content.description"}}
+{{view Ember.TextArea id="description" class="span12" valueBinding="description" action="save"}}
 
 <div class="table-attachments" style="margin-top: 40px;">
     <div style="padding: 8px; background-color: #fafafa;">Attachments {{view App.UploaderToJob id="job-upload" jobBinding="content" classNames="btn btn-mini btn-success pull-right"}}</div>

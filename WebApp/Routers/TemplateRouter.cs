@@ -52,7 +52,7 @@
             _context = context;
 
             Map("~/Client/routes/", BuildName);
-            Map("~/Client/components/", file => String.Format("components/{0}", Path.GetFileNameWithoutExtension(file)));
+            Map("~/Client/controls/", file => String.Format("controls/{0}", Path.GetFileNameWithoutExtension(file)));
 
             var minifier = new Minifier();
             context.Response.ContentType = "text/javascript";
