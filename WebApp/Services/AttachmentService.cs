@@ -7,6 +7,7 @@ using MongoDB.Bson;
 using MongoDB.Driver.Builders;
 using MongoDB.Driver.GridFS;
 using OpenCat.Models;
+using OpenCat.Parsers;
 using UpdateBuilder = MongoDB.Driver.Builders.Update;
 
 namespace OpenCat.Services
@@ -14,11 +15,13 @@ namespace OpenCat.Services
     public class AttachmentService : Service<Attachment>
     {
         protected IRepository<Job> Jobs { get; set; }
+        protected IRepository<Unit> Units { get; set; }
 
-        public AttachmentService(IRepository<Attachment> repository, IRepository<Job> jobs)
+        public AttachmentService(IRepository<Attachment> repository, IRepository<Job> jobs, IRepository<Unit> units)
             : base(repository)
         {
             Jobs = jobs;
+            Units = units;
         }
 
         private static Attachment FromFileInfo(MongoGridFSFileInfo info)
@@ -75,10 +78,24 @@ namespace OpenCat.Services
                 Metadata = new BsonDocument(new BsonElement("job_id", job_id))
             };
             var info = gfs.Upload(file.InputStream, file.FileName, options);
+            var attachment = FromFileInfo(info);
 
             var query = Query.EQ("_id", job_id);
-            var update = UpdateBuilder.AddToSet("attachment_ids", info.Id.ToString());
+            var update = UpdateBuilder.AddToSet("attachment_ids", attachment.id);
             Jobs.Collection.Update(query, update);
+
+            var parser = new TxtParser();
+            if (parser.CanParse(attachment))
+            {
+                var ids = new List<string>();
+                var units = parser.Parse(attachment);
+                foreach (var unit in units)
+                {
+                    ids.Add(Units.Create(unit).id);
+                }
+                var units_update = UpdateBuilder.AddToSetEach("unit_ids", new BsonArray(ids));
+                Jobs.Collection.Update(query, units_update);
+            }
         }
 
         public override bool Delete(string id)

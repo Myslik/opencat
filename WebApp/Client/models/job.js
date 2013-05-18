@@ -7,5 +7,6 @@ App.Job = DS.Model.extend({
     words: attr('number'),
 
     // Relationships
-    attachments: DS.hasMany('App.Attachment')
+    attachments: DS.hasMany('App.Attachment'),
+    units: DS.hasMany('App.Unit')
 });

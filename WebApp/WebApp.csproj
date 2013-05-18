@@ -235,6 +235,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\API\AttachmentsController.cs" />
+    <Compile Include="Controllers\API\UnitsController.cs" />
     <Compile Include="Controllers\AttachmentsController.cs" />
     <Compile Include="Controllers\API\JobsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -242,6 +243,11 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Models\Unit.cs" />
+    <Compile Include="Parsers\IParser.cs" />
+    <Compile Include="Parsers\Parser.cs" />
+    <Compile Include="Parsers\ParserHelper.cs" />
+    <Compile Include="Parsers\TxtParser.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
@@ -262,11 +268,13 @@
     <Compile Include="Services\IService.cs" />
     <Compile Include="Services\JobService.cs" />
     <Compile Include="Services\Service.cs" />
+    <Compile Include="Services\UnitService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Client\controls\extension.css" />
     <Content Include="Client\controls\extension.js" />
+    <Content Include="Client\models\unit.js" />
     <Content Include="Client\routes\api\controller.js" />
     <Content Include="Client\app.js" />
     <Content Include="Client\routes\attachments\controller.js" />
