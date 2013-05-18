@@ -1,51 +1,59 @@
 ﻿Ember.TextArea.reopen({
 
-    interpretKeyEvents: function (event) {
-        var map = Ember.TextSupport.KEY_EVENTS;
-        var method = map[event.keyCode];
-
-        this._elementValueDidChange();
-        if (event.ctrlKey && event.keyCode === 13) {
-            return sendAction(this, event);
-        }
-        if (method) { return this[method](event); }
-    },
-
-    didInsertElement: function () {
-        this.$().tooltip({
-            title: 'Ctrl + Enter to save',
-            placement: 'bottom',
-            trigger: 'focus'
-        });
-    },
-    willDestroyElement: function () {
-        this.$().tooltip('destroy');
-    },
+    onEvent: 'controlEnter focusOut',
 
     action: null,
-    bubbles: false
+
+    redo: null,
+
+    bubbles: false,
+
+    focusOut: function (event) {
+        sendAction('focusOut', this, event);
+    },
+
+    insertNewline: function (event) {
+        if (event.ctrlKey) {
+            sendAction('controlEnter', this, event);
+        }
+    },
+
+    cancel: function (event) {
+        sendAction('redo', this, event);
+    }
 
 });
 
 Ember.TextField.reopen({
 
-    didInsertElement: function () {
-        this.$().tooltip({
-            title: 'Enter to save',
-            placement: 'bottom',
-            trigger: 'focus'
-        });
+    onEvent: 'enter focusOut',
+
+    redo: null,
+
+    focusOut: function (event) {
+        sendAction('focusOut', this, event);
     },
-    willDestroyElement: function () {
-        this.$().tooltip('destroy');
+
+    insertNewline: function (event) {
+        sendAction('enter', this, event);
+    },
+
+    keyPress: function (event) {
+        sendAction('keyPress', this, event);
+    },
+
+    cancel: function (event) {
+        sendAction('redo', this, event);
     }
 
 });
 
-function sendAction(view, event) {
-    var action = Ember.get(view, 'action');
+function sendAction(eventName, view, event) {
+    var action = Ember.get(view, 'action'),
+        redo = Ember.get(view, 'redo'),
+        on = Ember.get(view, 'onEvent');
 
-    if (action !== null) {
+    send = function (action) {
         var controller = Ember.get(view, 'controller'),
             value = Ember.get(view, 'value'),
             bubbles = Ember.get(view, 'bubbles');
@@ -55,5 +63,11 @@ function sendAction(view, event) {
         if (!bubbles) {
             event.stopPropagation();
         }
+    };
+
+    if (redo != null && eventName === 'redo') {
+        send(redo);
+    } else if (action !== null && on.w().contains(eventName)) {
+        send(action);
     }
 }
