@@ -21,6 +21,7 @@
                 this.set('isVisible', true);
             } else {
                 this.set('title', 'Saved');
+                this.set('disabled', true);
                 var cancel = Ember.run.later(this, function () {
                     this.set('isVisible', false);
                 }, 2000);

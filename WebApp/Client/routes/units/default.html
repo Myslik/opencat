@@ -1,0 +1,23 @@
+﻿{{#if content}}
+{{#each unit in controller}}
+    <div class="row-fluid">
+
+        <div class="span6 unit-source">
+            {{#if unit.isDirty}}
+                <span class="label label-warning">Changed</span>
+            {{else}}
+                <span class="label label-success">Saved</span>
+            {{/if}}
+            {{unit.source}}
+        </div>
+        <div class="span6 unit-target">
+            <div class="row-fluid">
+                {{view Ember.TextField class="span12" valueBinding="unit.target" modelBinding="unit" action="save" redo="redo"}}
+            </div>
+        </div>
+
+    </div>
+{{/each}}
+{{else}}
+    There are no translation units.
+{{/if}}

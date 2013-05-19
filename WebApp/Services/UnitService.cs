@@ -14,7 +14,7 @@ namespace OpenCat.Services
 
         public IEnumerable<Unit> Read(string[] ids)
         {
-            var query = Query.In("_id", new BsonArray(ids.Select(id => ObjectId.Parse(id))));
+            var query = Query.In("_id", new BsonArray(ids));
             return Repository.Collection.Find(query).AsEnumerable();
         }
     }

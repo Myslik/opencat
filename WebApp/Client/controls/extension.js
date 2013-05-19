@@ -2,6 +2,8 @@
 
     onEvent: 'controlEnter focusOut',
 
+    model: null,
+
     action: null,
 
     redo: null,
@@ -27,6 +29,8 @@
 Ember.TextField.reopen({
 
     onEvent: 'enter focusOut',
+
+    model: null,
 
     redo: null,
 
@@ -55,10 +59,10 @@ function sendAction(eventName, view, event) {
 
     send = function (action) {
         var controller = Ember.get(view, 'controller'),
-            value = Ember.get(view, 'value'),
+            model = Ember.get(view, 'model'),
             bubbles = Ember.get(view, 'bubbles');
 
-        controller.send(action, value, view);
+        controller.send(action, model, view);
 
         if (!bubbles) {
             event.stopPropagation();

@@ -17,6 +17,7 @@ textarea.ember-text-area {
             transition: border linear 0.2s, box-shadow linear 0.2s;
 
     resize: none;
+    margin-bottom: 0;
 }
 
 textarea.ember-text-area {

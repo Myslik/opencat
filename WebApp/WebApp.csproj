@@ -295,6 +295,9 @@
     <Content Include="Client\router.js" />
     <Content Include="Client\routes\job\controller.js" />
     <Content Include="Client\routes\job\job.css" />
+    <Content Include="Client\routes\units\controller.js" />
+    <Content Include="Client\routes\units\default.html" />
+    <Content Include="Client\routes\units\units.css" />
     <Content Include="Client\store.js" />
     <Content Include="Client\routes\application.html" />
     <Content Include="Client\routes\attachments\default.html" />

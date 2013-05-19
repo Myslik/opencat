@@ -1,3 +1,16 @@
-﻿.job-header {
-    margin-left: 42px;
+﻿input[type="text"].job-header {
+    margin-left: 6px;
+
+    font-size: 20px;
+    height: 26px;
+    font-weight: bold;
+}
+
+.badge-indent {
+    margin-left: 10px;
+}
+
+.bubble-panel [class^="icon-"], 
+.bubble-panel [class*=" icon-"] {
+    margin-top: 0;
 }
