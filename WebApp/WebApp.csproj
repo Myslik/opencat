@@ -274,6 +274,7 @@
   <ItemGroup>
     <Content Include="Client\controls\extension.css" />
     <Content Include="Client\controls\extension.js" />
+    <Content Include="Client\controls\save\save.js" />
     <Content Include="Client\models\unit.js" />
     <Content Include="Client\routes\api\controller.js" />
     <Content Include="Client\app.js" />
@@ -293,6 +294,7 @@
     <Content Include="Client\models\language.js" />
     <Content Include="Client\router.js" />
     <Content Include="Client\routes\job\controller.js" />
+    <Content Include="Client\routes\job\job.css" />
     <Content Include="Client\store.js" />
     <Content Include="Client\routes\application.html" />
     <Content Include="Client\routes\attachments\default.html" />
@@ -301,7 +303,6 @@
     <Content Include="Client\routes\jobs\new\default.html" />
     <Content Include="Client\routes\api\default.html" />
     <Content Include="Client\routes\index\default.html" />
-    <Content Include="Client\routes\attachments\attachments.css" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />

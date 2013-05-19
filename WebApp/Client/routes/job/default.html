@@ -1,12 +1,30 @@
-﻿<img alt="job" src="/Images/book.png" style="float: left; margin-right: 10px;" />
-<div style="margin-left: 42px; font-size:large; font-weight: bold;">
-    {{view Ember.TextField id="name" valueBinding="name" action="save" redo="redo"}}
-</div>
-<hr class="clearfix" style="margin: 10px 0;" />
+﻿<div class="bubble">
+    <div class="bubble-inner">
 
-{{view Ember.TextArea id="description" class="span12" valueBinding="description" action="save" redo="redo"}}
+        <div class="bubble-header">
+            <img alt="job" src="/Images/book.png" class="pull-left" />
 
-<div class="table-attachments" style="margin-top: 40px;">
-    <div style="padding: 8px; background-color: #fafafa;">Attachments {{view App.UploaderToJob id="job-upload" jobBinding="content" classNames="btn btn-mini btn-success pull-right"}}</div>
-    {{render 'attachments' attachments}}
+            {{view App.Save class="pull-right" modelBinding="content"}}
+
+            {{view Ember.TextField id="name" valueBinding="name" action="save" redo="redo"}}
+        </div>
+
+        <div class="bubble-panel">
+            Description
+        </div>
+
+        <div class="row-fluid">
+            {{view Ember.TextArea id="description" class="span12" valueBinding="description" action="save" redo="redo"}}
+        </div>
+
+        <div class="bubble-panel">
+            Attachments
+            {{view App.UploaderToJob id="job-upload" jobBinding="content" classNames="btn btn-mini btn-success pull-right"}}
+        </div>
+
+        <div class="bubble-table">
+            {{render 'attachments' attachments}}
+        </div>
+
+    </div>
 </div>
