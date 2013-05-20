@@ -8,6 +8,7 @@ using MongoDB.Driver.Builders;
 using MongoDB.Driver.GridFS;
 using OpenCat.Models;
 using OpenCat.Parsers;
+using OpenCat.Plugins;
 using UpdateBuilder = MongoDB.Driver.Builders.Update;
 
 namespace OpenCat.Services
@@ -84,11 +85,10 @@ namespace OpenCat.Services
             var update = UpdateBuilder.AddToSet("attachment_ids", attachment.id);
             Jobs.Collection.Update(query, update);
 
-            var parser = new TxtParser();
-            if (parser.CanParse(attachment))
+            var units = Plugin.Parse(attachment);
+            if (units.Count() > 0)
             {
                 var ids = new List<string>();
-                var units = parser.Parse(attachment);
                 foreach (var unit in units)
                 {
                     ids.Add(Units.Create(unit).id);

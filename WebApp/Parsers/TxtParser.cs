@@ -9,6 +9,10 @@ namespace OpenCat.Parsers
 {
     public class TxtParser : Parser
     {
+        public override string Name { get { return "Basic Text Parser"; } }
+        public override string Description { get { return "Parses plain text files."; } }
+        public override string Author { get { return "premyslkrajcovic@gmail.com"; } }
+
         public override IEnumerable<Unit> Parse(Attachment attachment)
         {
             using (var reader = new StreamReader(attachment.OpenRead()))
