@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using MongoDB.Driver;
 using OpenCat.Models;
 
 namespace OpenCat.Services
 {
     public class UserService : Service<User>
     {
-        public UserService(IRepository<User> repository) : base(repository) { }
+        public UserService(MongoDatabase database) : base(database) { }
 
         public override User Create(User entity)
         {

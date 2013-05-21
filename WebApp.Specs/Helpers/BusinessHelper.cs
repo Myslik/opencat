@@ -25,19 +25,14 @@ namespace WebApp.Specs
             get { return database.Value; }
         }
 
-        public static IRepository<TEntity> GetRepository<TEntity>() where TEntity : Entity
-        {
-            return new Repository<TEntity>(Database);
-        }
-
         public static AttachmentService GetAttachmentService()
         {
-            return new AttachmentService(GetRepository<Attachment>(), GetRepository<Job>());
+            return new AttachmentService(Database);
         }
 
         public static JobService GetJobService()
         {
-            return new JobService(GetRepository<Job>());
+            return new JobService(Database);
         }
 
         public static void UploadFileToJob(string name, string filename, Stream content)

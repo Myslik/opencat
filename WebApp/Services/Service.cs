@@ -9,11 +9,20 @@ namespace OpenCat.Services
 {
     public class Service<TEntity> : IService<TEntity> where TEntity : Entity
     {
-        protected IRepository<TEntity> Repository { get; private set; }
-
-        public Service(IRepository<TEntity> repository)
+        protected MongoDatabase Database { get; private set; }
+        protected IRepository<TEntity> Repository
         {
-            Repository = repository;
+            get { return GetRepository<TEntity>(); }
+        }
+
+        protected IRepository<T> GetRepository<T>() where T : Entity
+        {
+            return new Repository<T>(Database);
+        }
+
+        public Service(MongoDatabase database)
+        {
+            Database = database;
         }
 
         public virtual TEntity Create(TEntity entity)

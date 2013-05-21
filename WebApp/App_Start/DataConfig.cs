@@ -18,7 +18,7 @@ namespace OpenCat
             var database = new MongoClient().GetServer().GetDatabase(dbName);
 
             // Users
-            var users = new UserService(new Repository<User>(database));
+            var users = new UserService(database);
 
             if (!users.Read().Any(u => u.email == "user@gmail.com"))
             {
@@ -30,7 +30,7 @@ namespace OpenCat
             }
 
             // Jobs
-            var jobs = new JobService(new Repository<Job>(database));
+            var jobs = new JobService(database);
 
             if (!jobs.Read().Any())
             {

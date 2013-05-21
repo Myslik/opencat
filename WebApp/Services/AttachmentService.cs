@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using MongoDB.Bson;
+using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using MongoDB.Driver.GridFS;
 using OpenCat.Models;
@@ -15,15 +16,11 @@ namespace OpenCat.Services
 {
     public class AttachmentService : Service<Attachment>
     {
-        protected IRepository<Job> Jobs { get; set; }
-        protected IRepository<Unit> Units { get; set; }
+        protected IRepository<Job> Jobs { get { return GetRepository<Job>(); } }
+        protected IRepository<Unit> Units { get { return GetRepository<Unit>(); } }
 
-        public AttachmentService(IRepository<Attachment> repository, IRepository<Job> jobs, IRepository<Unit> units)
-            : base(repository)
-        {
-            Jobs = jobs;
-            Units = units;
-        }
+        public AttachmentService(MongoDatabase database)
+            : base(database) { }
 
         private static Attachment FromFileInfo(MongoGridFSFileInfo info)
         {

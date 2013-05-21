@@ -23,17 +23,15 @@ namespace OpenCat.Plugins
 
         public static IEnumerable<T> Load<T>()
         {
-            if (!typeof(T).IsInterface) throw new ArgumentException("Must be interface");
-
             return Assembly.GetExecutingAssembly().GetTypes()
                 .Where(x => x.IsSubclassOf(typeof(Plugin)))
-                .Where(x => typeof(T).IsAssignableFrom(x))
+                .Where(x => x.IsSubclassOf(typeof(T)))
                 .Select(t => Activator.CreateInstance(t)).Cast<T>();
         }
 
         public static IEnumerable<Unit> Parse(Attachment attachment)
         {
-            var parsers = Load<IParser>();
+            var parsers = Load<Parser>();
 
             foreach (var parser in parsers)
             {
