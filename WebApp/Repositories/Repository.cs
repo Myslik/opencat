@@ -8,6 +8,8 @@
     using System.Linq;
     using System.Collections.Generic;
     using System.Configuration;
+using System.IO;
+    using MongoDB.Driver.GridFS;
 
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
@@ -33,8 +35,14 @@
 
         public virtual TEntity Read(string id)
         {
-            var query = Query.EQ("_id", id);
+            var query = Query.EQ("_id", ObjectId.Parse(id));
             return Collection.Find(query).FirstOrDefault();
+        }
+
+        public virtual IEnumerable<TEntity> Read(string[] ids)
+        {
+            var query = Query.In("_id", new BsonArray(ids.Select(id => ObjectId.Parse(id))));
+            return Collection.Find(query).AsEnumerable();
         }
 
         public virtual TEntity Create(TEntity entity)
@@ -49,7 +57,7 @@
 
         public virtual bool Update(string id, TEntity entity)
         {
-            var query = Query.EQ("_id", id);
+            var query = Query.EQ("_id", ObjectId.Parse(id));
 
             var updates = new List<IMongoUpdate>();
             var document = entity.ToBsonDocument();
@@ -70,7 +78,7 @@
 
         public virtual bool Delete(string id)
         {
-            var query = Query.EQ("_id", id);
+            var query = Query.EQ("_id", ObjectId.Parse(id));
             var result = Collection.Remove(query);
             return result.DocumentsAffected == 1;
         }

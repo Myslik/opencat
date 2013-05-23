@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using MongoDB.Bson;
     using MongoDB.Bson.Serialization.Attributes;
 
     public interface IPartialUpdate
@@ -11,6 +12,8 @@
 
     public class Entity : IPartialUpdate
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public String id { get; set; }
         public DateTime created_at { get; set; }
         public DateTime updated_at { get; set; }

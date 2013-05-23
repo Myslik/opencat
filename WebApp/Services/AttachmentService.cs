@@ -43,11 +43,11 @@ namespace OpenCat.Services
 
         public override Attachment Read(string id)
         {
-            var info = Repository.Database.GridFS.FindOne(Query.EQ("_id", id));
+            var info = Repository.Database.GridFS.FindOne(Query.EQ("_id", ObjectId.Parse(id)));
             return FromFileInfo(info);
         }
 
-        public IEnumerable<Attachment> Read(string[] ids)
+        public override IEnumerable<Attachment> Read(string[] ids)
         {
             var query = Query.In("_id", new BsonArray(ids.Select(id => ObjectId.Parse(id))));
             return Repository.Database.GridFS.Find(query).Select(info => FromFileInfo(info));
@@ -78,7 +78,7 @@ namespace OpenCat.Services
             var info = gfs.Upload(file.InputStream, file.FileName, options);
             var attachment = FromFileInfo(info);
 
-            var query = Query.EQ("_id", job_id);
+            var query = Query.EQ("_id", ObjectId.Parse(job_id));
             var update = UpdateBuilder.AddToSet("attachment_ids", attachment.id);
             Jobs.Collection.Update(query, update);
 

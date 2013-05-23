@@ -40,6 +40,11 @@ namespace OpenCat.Services
             return Repository.Read(id);
         }
 
+        public virtual IEnumerable<TEntity> Read(string[] ids)
+        {
+            return Repository.Read(ids);
+        }
+
         public virtual bool Update(string id, TEntity entity)
         {
             return Repository.Update(id, entity);

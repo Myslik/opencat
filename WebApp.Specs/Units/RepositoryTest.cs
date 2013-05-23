@@ -73,7 +73,7 @@ namespace WebApp.Specs.Units
             Assert.IsNotNull(query);
             Assert.IsNotNull(update);
 
-            Assert.AreEqual(entity.id, query.ToBsonDocument()["_id"].AsString);
+            Assert.AreEqual(entity.id, query.ToBsonDocument()["_id"].ToString());
             var document = update.ToBsonDocument();
             Assert.IsNotNull(document["$set"]["updated_at"]);
             Assert.AreEqual(updateEntity.name, document["$set"]["name"].AsString);

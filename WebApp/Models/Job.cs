@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using MongoDB.Bson.Serialization.Attributes;
 
     public class Job : Entity
     {

@@ -8,6 +8,7 @@
     {
         TEntity Create(TEntity entity);
         IQueryable<TEntity> Read();
+        IEnumerable<TEntity> Read(string[] ids);
         TEntity Read(string id);
         bool Update(string id, TEntity entity);
         bool Delete(string id);
