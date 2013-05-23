@@ -82,7 +82,7 @@ namespace OpenCat.Services
             var update = UpdateBuilder.AddToSet("attachment_ids", attachment.id);
             Jobs.Collection.Update(query, update);
 
-            var units = Plugin.Parse(attachment);
+            var units = Plugin.TryParse(attachment);
             if (units.Count() > 0)
             {
                 var ids = new List<string>();

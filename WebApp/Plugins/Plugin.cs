@@ -29,7 +29,7 @@ namespace OpenCat.Plugins
                 .Select(t => Activator.CreateInstance(t)).Cast<T>();
         }
 
-        public static IEnumerable<Unit> Parse(Attachment attachment)
+        public static IEnumerable<Unit> TryParse(Attachment attachment)
         {
             var parsers = Load<Parser>();
 

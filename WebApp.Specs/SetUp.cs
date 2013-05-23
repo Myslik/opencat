@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
+using Microsoft.Build.Evaluation;
+using Microsoft.Build.Execution;
 using MongoDB.Driver;
 using NUnit.Framework;
 using OpenCat;
@@ -27,7 +30,7 @@ namespace WebApp.Specs
             get
             {
                 var path = new DirectoryInfo(Environment.CurrentDirectory);
-                return Path.Combine(path.Parent.Parent.Parent.FullName, "WebApp");
+                return Path.Combine(path.Parent.Parent.Parent.FullName, @"WebApp\obj\Release\Package\PackageTmp");
             }
         }
 
@@ -42,6 +45,13 @@ namespace WebApp.Specs
         [SetUp]
         public void RunBeforeAnyTests()
         {
+            ProjectCollection pc = new ProjectCollection();
+            Dictionary<string, string> GlobalProperty = new Dictionary<string, string>();
+            GlobalProperty.Add("Configuration", "Debug");
+            BuildRequestData BuidlRequest = new BuildRequestData(@"..\..\..\WebApp\WebApp.csproj", 
+                GlobalProperty, null, new string[] { "Package" }, null);
+            BuildResult buildResult = BuildManager.DefaultBuildManager.Build(new BuildParameters(pc), BuidlRequest);
+            
             iisexpress = new Process();
             iisexpress.StartInfo = new ProcessStartInfo
             {
